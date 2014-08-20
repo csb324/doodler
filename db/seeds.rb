@@ -6,6 +6,12 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Mission.delete_all
+Doodle.delete_all
+
 10.times do
-  Mission.create(name: RandomWord.nouns.next)
+  @mission = Mission.create(name: RandomWord.nouns.next)
+  4.times do
+    Doodle.create(name: RandomWord.nouns.next, mission: @mission)
+  end
 end

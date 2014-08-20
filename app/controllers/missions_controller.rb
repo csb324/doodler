@@ -9,6 +9,8 @@ class MissionsController < ApplicationController
 
   def show
     @mission = Mission.find(params[:id])
+    @doodles = @mission.doodles
+    respond_with(@mission, @doodles)
   end
 
 end
