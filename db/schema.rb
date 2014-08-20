@@ -11,15 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140820182923) do
+ActiveRecord::Schema.define(version: 20140820201218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id",    null: false
+    t.integer  "doodle_id",  null: false
+    t.string   "body"
+  end
 
   create_table "doodles", force: true do |t|
     t.string  "name"
     t.integer "mission_id"
     t.integer "user_id"
+    t.string  "image_path", default: "bunny.jpg"
   end
 
   add_index "doodles", ["user_id"], name: "index_doodles_on_user_id", using: :btree
@@ -29,6 +38,7 @@ ActiveRecord::Schema.define(version: 20140820182923) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.string   "description"
   end
 
   add_index "missions", ["user_id"], name: "index_missions_on_user_id", using: :btree

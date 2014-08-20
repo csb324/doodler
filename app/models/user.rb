@@ -6,5 +6,6 @@ class User < ActiveRecord::Base
 
   has_many :doodles
   has_many :missions
+  has_many :comments
 
 end

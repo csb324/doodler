@@ -1,7 +1,5 @@
 <h1><%= @mission.name %></h1>
 
-<ul>
-  <% @doodles.each do |doodle| %>
-    <li><%= doodle.name %></li>
-  <% end %>
-</ul>
+<div id="doodles" data-mission=<%= @mission.id %>>
+
+</div>
