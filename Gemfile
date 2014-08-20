@@ -41,5 +41,5 @@ gem 'spring',        group: :development
 gem 'rspec-rails', group: :test
 gem 'angularjs-rails'
 
-gem 'haml-rails'
 gem 'random-word'
+gem 'devise'

@@ -1,1 +1,1 @@
-DOING RIGHT NOW: doodles belong to missions
+DOING RIGHT NOW: devise users etc
