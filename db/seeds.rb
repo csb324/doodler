@@ -8,10 +8,13 @@
 
 Mission.delete_all
 Doodle.delete_all
+User.delete_all
+
+@admin = User.create(email: "Admin@doodler.com", password: "password")
 
 10.times do
-  @mission = Mission.create(name: RandomWord.nouns.next)
+  @mission = Mission.create(name: RandomWord.nouns.next, user: @admin)
   4.times do
-    Doodle.create(name: RandomWord.nouns.next, mission: @mission)
+    Doodle.create(name: RandomWord.nouns.next, mission: @mission, user: @admin)
   end
 end

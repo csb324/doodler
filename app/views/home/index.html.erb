@@ -1,0 +1,23 @@
+<% if user_signed_in? %>
+  <div>
+    <h1>welcome, <%= current_user.email %></h1>
+  </div>
+
+  <h3>your drawings</h3>
+  <ul>
+    <% current_user.doodles.each do |drawing| %>
+      <li><%= drawing.name %></li>
+    <% end %>
+  </ul>
+
+  <h3>all open missions</h3>
+
+  <ul>
+    <% @missions.each do |mission| %>
+      <li><%= link_to mission.name, mission %></li>
+    <% end %>
+  </ul>
+
+<% else %>
+
+<% end %>
