@@ -1,1 +1,1 @@
-DOING RIGHT NOW: devise users etc
+DOING RIGHT NOW: set up static controller
