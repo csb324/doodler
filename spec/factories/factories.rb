@@ -1,12 +1,12 @@
 FactoryGirl.define do
   factory :user do
     email { Faker::Internet.email }
-    password { Faker::Lorem.words(3).join }
+    password { Faker::Lorem.words(5).join }
   end
 
   factory :mission do
     user
-    name { Faker::Lorem.words(1).join }
+    name { Faker::Lorem.word }
   end
 
   factory :doodle do

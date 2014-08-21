@@ -6,6 +6,7 @@ feature 'User votes on a drawing', :js do
     @user = create(:user)
     @userTwo = create(:user)
     @mission = create(:mission)
+    @doodle = create(:doodle, user: @userTwo, mission: @mission)
   end
 
   scenario 'unsuccessfully when not signed in' do
@@ -19,7 +20,6 @@ feature 'User votes on a drawing', :js do
 
   scenario 'successfully up' do
 
-    @doodle = create(:doodle, user: @userTwo, mission: @mission)
     sign_in_as(@user)
     visit root_path
     click_link @mission.name
