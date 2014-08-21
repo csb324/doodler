@@ -14,8 +14,6 @@ ViewAndCreateDoodles =
 
   getDoodles: ->
     thisMission = "/missions/#{@missionId}"
-    console.log(thisMission)
-    console.log(@missionId)
     $.ajax
       url: thisMission
       type: 'GET'
@@ -24,9 +22,8 @@ ViewAndCreateDoodles =
         console.log(doodles)
         $('#doodles').empty()
         doodles.forEach (doodle) ->
-          image = HandlebarsTemplates.doodles(doodle)
-          console.log(doodle)
-          $('#doodles').append(image)
+          oneDoodle = HandlebarsTemplates.doodles(doodle)
+          $('#doodles').append(oneDoodle)
 
   initializeDrawing: ->
     console.log("drawing area initialized")
@@ -162,15 +159,4 @@ ViewAndCreateDoodles =
     this.clickDrag = []
 
     this.drawingEnvironment()
-
-
-
-
-
-
-
-
-
-
-
 

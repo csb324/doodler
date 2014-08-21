@@ -53,6 +53,8 @@ gem 'foundation-rails'
 
 gem 'handlebars_assets'
 
+gem 'active_model_serializers'
+
 group :development, :test do
   gem 'jasmine-rails'
   gem 'rspec-rails'

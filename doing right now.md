@@ -1,1 +1,1 @@
-DOING RIGHT NOW: feature tests
+DOING RIGHT NOW: add a serializer (for user data in json)
