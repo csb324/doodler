@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140820201218) do
+ActiveRecord::Schema.define(version: 20140821153126) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20140820201218) do
     t.integer "mission_id"
     t.integer "user_id"
     t.string  "image_path", default: "bunny.jpg"
+    t.string  "image"
   end
 
   add_index "doodles", ["user_id"], name: "index_doodles_on_user_id", using: :btree

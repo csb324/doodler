@@ -48,3 +48,5 @@ gem 'carrierwave'
 gem 'fog'
 gem 'rmagick', require: false
 gem 'aws-sdk'
+
+gem 'dotenv-rails'

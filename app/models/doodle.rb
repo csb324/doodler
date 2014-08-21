@@ -4,6 +4,6 @@ class Doodle < ActiveRecord::Base
 
   has_many :comments
 
-  mount_uploader :image_path, DoodlefileUploader
+  mount_uploader :image, DoodlefileUploader
 
 end

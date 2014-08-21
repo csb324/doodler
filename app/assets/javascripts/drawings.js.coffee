@@ -6,21 +6,25 @@ ViewAndCreateDoodles =
     doodlesBox = $('#doodles')
     if doodlesBox.length > 0
       @missionId = doodlesBox.data("mission")
-      @getDoodles
+      @getDoodles()
 
     $('#submit').click (event) =>
       event.preventDefault()
       @initializeDrawing()
 
-  getDoodles: =>
+  getDoodles: ->
+    thisMission = "/missions/#{@missionId}"
+    console.log(thisMission)
+    console.log(@missionId)
     $.ajax
-      url: "/missions/#{@missionId}"
+      url: thisMission
       type: 'GET'
       dataType: 'json'
       success: (doodles) ->
+        console.log(doodles)
         $('#doodles').empty()
         doodles.forEach (doodle) ->
-          image = $('<img>').attr("src", "../assets/#{doodle.image_path}")
+          image = $('<img>').attr("src", doodle.image.url)
           $('#doodles').append(image)
 
   initializeDrawing: ->
@@ -106,32 +110,48 @@ ViewAndCreateDoodles =
     this.redraw()
     $('#my-canvas')[0].style.webkitFilter = "blur(25px)"
     finishButton = $('<button>').attr("id", "confirm").text("are you sure?")
+
     finishButton.css("position", "absolute").css("left", "200px").css("top", "200px")
     $('#doodles').append(finishButton)
+
     finishButton.click (event) =>
       event.preventDefault()
       @saveImage()
 
     # this.createImage()
 
-  # this turns the canvas data into a Blob (large binary object)
-  createBlob: (imageData) ->
-    binary = atob(imageDAta.split(',')[1]);
-    array = []
-    i = 0
+  # # this turns the canvas data into a Blob (large binary object)
+  # createBlob: (imageData) ->
+  #   binary = atob(imageDAta.split(',')[1]);
+  #   array = []
+  #   i = 0
 
-    while i < binary.length
-      array.push binary.charCodeAt(i)
-      i++
+  #   while i < binary.length
+  #     array.push binary.charCodeAt(i)
+  #     i++
 
-    new Blob([new Uint8Array(array)],
-      type: 'image/png'
-    )
+  #   new Blob([new Uint8Array(array)],
+  #     type: 'image/png'
+  #   )
 
   saveImage: ->
     drawingData = $('#my-canvas')[0].toDataURL()
-    file = @createBlob(drawingData)
 
+    newImage = $('<img>').attr('src', drawingData)
+    $('#doodles').empty().append(newImage)
+
+    $.ajax
+      url: "/missions/#{@missionId}/doodles"
+      type: "POST"
+      dataType: 'json'
+      data:
+        doodle:
+          imagedata: drawingData
+          mission_id: @missionId
+      success: (doodle, status) ->
+        alert(status)
+        console.log(this)
+        ViewAndCreateDoodles.getDoodles()
 
   drawAgain: ->
     this.paint = false;
