@@ -1,23 +1,33 @@
 <% if user_signed_in? %>
+<div class="row">
   <div>
     <h1>welcome, <%= current_user.email %></h1>
   </div>
 
-  <h3>your drawings</h3>
-  <ul>
-    <% current_user.doodles.each do |drawing| %>
-      <li><%= drawing.name %></li>
-    <% end %>
-  </ul>
+  <h2>open missions</h2>
+  <% @missions.each do |mission| %>
+    <div class="medium-3 columns">
+      <% if mission.doodles.present? %>
+        <%= image_tag mission.doodles.first.image.url, alt: "top", width: 100 %>
+      <% end %>
+      <h4><%= link_to mission.name, mission %></h4>
+    </div>
+  <% end %>
+</div>
+<div class="row">
+  <div class="medium-4 columns">
+    <h4>your recent doodles</h4>
+    <ul>
+      <% current_user.doodles.each do |doodle| %>
+        <li><%= link_to doodle.mission.name, doodle.mission %></li>
+      <% end %>
+    </ul>
 
-  <h3>all open missions</h3>
-
-  <ul>
-    <% @missions.each do |mission| %>
-      <li><%= link_to mission.name, mission %></li>
-    <% end %>
-  </ul>
+  </div>
+</div>
 
 <% else %>
 
+
 <% end %>
+</div>
