@@ -38,9 +38,6 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'rspec-rails', group: :test
-gem 'angularjs-rails'
-
 gem 'random-word'
 gem 'devise'
 
@@ -58,6 +55,7 @@ group :development, :test do
   gem 'ffaker'
   gem 'pry-rails'
   gem 'pry-byebug'
+  gem 'factory_girl_rails'
 end
 
 group :test do

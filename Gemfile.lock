@@ -28,7 +28,6 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     addressable (2.3.6)
-    angularjs-rails (1.2.22)
     arel (5.0.1.20140414130214)
     aws-sdk (1.49.0)
       json (~> 1.4)
@@ -76,6 +75,11 @@ GEM
     erubis (2.7.0)
     excon (0.38.0)
     execjs (2.2.1)
+    factory_girl (4.4.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.4.1)
+      factory_girl (~> 4.4.0)
+      railties (>= 3.0.0)
     ffaker (1.24.0)
     fog (1.23.0)
       fog-brightbox
@@ -238,7 +242,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  angularjs-rails
   aws-sdk
   capybara
   carrierwave
@@ -246,6 +249,7 @@ DEPENDENCIES
   database_cleaner
   devise
   dotenv-rails
+  factory_girl_rails
   ffaker
   fog
   foundation-rails
