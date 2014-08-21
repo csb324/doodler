@@ -39,15 +39,19 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'random-word'
+
 gem 'devise'
 
+# image uploading
 gem 'carrierwave'
 gem 'fog'
 gem 'rmagick', require: false
 gem 'aws-sdk'
-
 gem 'dotenv-rails'
+
 gem 'foundation-rails'
+
+gem 'handlebars_assets'
 
 group :development, :test do
   gem 'jasmine-rails'

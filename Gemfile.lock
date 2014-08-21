@@ -108,6 +108,11 @@ GEM
     foundation-rails (5.3.1.0)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
+    handlebars_assets (0.17.1)
+      execjs (>= 1.2.9)
+      multi_json
+      sprockets (>= 2.0.3)
+      tilt
     hike (1.2.3)
     i18n (0.6.11)
     inflecto (0.0.2)
@@ -253,6 +258,7 @@ DEPENDENCIES
   ffaker
   fog
   foundation-rails
+  handlebars_assets
   jasmine-rails
   jbuilder (~> 2.0)
   jquery-rails

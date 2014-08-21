@@ -24,7 +24,8 @@ ViewAndCreateDoodles =
         console.log(doodles)
         $('#doodles').empty()
         doodles.forEach (doodle) ->
-          image = $('<img>').attr("src", doodle.image.url)
+          image = HandlebarsTemplates.doodles(doodle)
+          console.log(doodle)
           $('#doodles').append(image)
 
   initializeDrawing: ->
