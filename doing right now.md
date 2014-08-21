@@ -1,1 +1,1 @@
-DOING RIGHT NOW: image uploading
+DOING RIGHT NOW: most basic styling ever

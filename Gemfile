@@ -50,3 +50,5 @@ gem 'rmagick', require: false
 gem 'aws-sdk'
 
 gem 'dotenv-rails'
+
+gem 'foundation-rails'

@@ -1,0 +1,20 @@
+<nav class="top-bar">
+  <ul class="title-area">
+    <li class="name"><h1><%= link_to 'DoodleMission', root_path %></h1></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <ul class="right">
+
+      <% if user_signed_in? %>
+        <li><a href="#">Signed in as <%= current_user.email %></a></li>
+        <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to 'Sign in', new_user_session_path %></li>
+      <% end %>
+
+    </ul>
+  </section>
+
+
+</nav>
