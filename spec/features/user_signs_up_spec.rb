@@ -6,7 +6,7 @@ feature 'Guest creates an account' do
     visit root_path
     click_link 'Sign up'
     fill_in 'Email', with: Faker::Internet.email
-    @password = Faker::Lorem.words(3).join
+    @password = Faker::Lorem.words(5).join
     fill_in 'Password', with: @password
     fill_in 'Password confirmation', with: @password
 

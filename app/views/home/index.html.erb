@@ -1,5 +1,4 @@
 <% if user_signed_in? %>
-<div class="row">
   <div>
     <h1>welcome, <%= current_user.email %></h1>
   </div>
@@ -13,7 +12,7 @@
       <h4><%= link_to mission.name, mission %></h4>
     </div>
   <% end %>
-</div>
+  </br>
 <div class="row">
   <div class="medium-4 columns">
     <h4>your recent doodles</h4>
@@ -30,4 +29,3 @@
 
 
 <% end %>
-</div>

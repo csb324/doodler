@@ -6,13 +6,13 @@ FactoryGirl.define do
 
   factory :mission do
     user
-    name { Faker::Lorem.words(1) }
+    name { Faker::Lorem.words(1).join }
   end
 
   factory :doodle do
     user
     mission
-    photo Rack::Test::UploadedFile.new(
+    image Rack::Test::UploadedFile.new(
       File.open(File.join(Rails.root, '/spec/fixtures/myfiles/bunny.jpg'))
     )
   end
