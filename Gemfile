@@ -43,3 +43,8 @@ gem 'angularjs-rails'
 
 gem 'random-word'
 gem 'devise'
+
+gem 'carrierwave'
+gem 'fog'
+gem 'rmagick', require: false
+gem 'aws-sdk'
