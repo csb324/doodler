@@ -2,30 +2,29 @@
   <div>
     <h1>welcome, <%= current_user.email %></h1>
   </div>
+<% end %>
 
-  <h2>open missions</h2>
-  <% @missions.each do |mission| %>
-    <div class="medium-3 columns">
-      <% if mission.doodles.present? %>
-        <%= image_tag mission.doodles.first.image.url, alt: "top", width: 100 %>
-      <% end %>
-      <h4><%= link_to mission.name, mission %></h4>
-    </div>
-  <% end %>
-  </br>
-<div class="row">
-  <div class="medium-4 columns">
-    <h4>your recent doodles</h4>
-    <ul>
-      <% current_user.doodles.each do |doodle| %>
-        <li><%= link_to doodle.mission.name, doodle.mission %></li>
-      <% end %>
-    </ul>
-
+<h2>open missions</h2>
+<% @missions.each do |mission| %>
+  <div class="medium-3 columns">
+    <% if mission.doodles.present? %>
+      <%= image_tag mission.doodles.first.image.url, alt: "top", width: 100 %>
+    <% end %>
+    <h4><%= link_to mission.name, mission %></h4>
   </div>
-</div>
+<% end %>
+</br>
 
-<% else %>
+<% if user_signed_in? %>
+  <div class="row">
+    <div class="medium-4 columns">
+      <h4>your recent doodles</h4>
+      <ul>
+        <% current_user.doodles.each do |doodle| %>
+          <li><%= link_to doodle.mission.name, doodle.mission %></li>
+        <% end %>
+      </ul>
 
-
+    </div>
+  </div>
 <% end %>
