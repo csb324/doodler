@@ -18,17 +18,17 @@ feature 'User votes on a drawing' do
     expect(page).to_not have_link 'Downvote'
   end
 
-  # scenario 'successfully up' do
-  #   sign_in_as(@user)
-  #   visit root_path
-  #   click_link @mission.name
+  scenario 'successfully up' do
+    sign_in_as(@user)
+    visit root_path
+    click_link @mission.name
 
-  #   within('div', text: @userTwo.email) do
-  #     expect(page).to have_content '0'
-  #     click_link 'Upvote'
+    within('div', text: @userTwo.email) do
+      expect(page).to have_content '0'
+      click_link 'Upvote'
 
-  #     expect(page).to have_content '1'
-  #   end
-  # end
+      expect(page).to have_content '1'
+    end
+  end
 
 end
