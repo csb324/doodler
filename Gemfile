@@ -50,5 +50,20 @@ gem 'rmagick', require: false
 gem 'aws-sdk'
 
 gem 'dotenv-rails'
-
 gem 'foundation-rails'
+
+group :development, :test do
+  gem 'jasmine-rails'
+  gem 'rspec-rails'
+  gem 'ffaker'
+  gem 'pry-rails'
+  gem 'pry-byebug'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'poltergeist'
+  gem 'shoulda-matchers'
+end
