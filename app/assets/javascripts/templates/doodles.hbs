@@ -1,6 +1,10 @@
-<div class="single-doodle">
+<div class="single-doodle" data-doodleId="{{id}}">
   <img src="{{uploaded_image}}" alt="{{user.name}}'s doodle">
   <h4>{{user.email}}</h4>
-  <p>{{points}} points</p>
-  <p><a href="#">Upvote</a> or <a href="#" title="">Downvote</a></p>
+  <p><span class="this-score">{{points}}</span> points</p>
+  <p>
+    <a class="vote" data-votedirection="1">Upvote</a>
+    or
+    <a class="vote" data-votedirection="-1">Downvote</a>
+  </p>
 </div>

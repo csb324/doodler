@@ -57,8 +57,8 @@ ViewAndCreateDoodles =
       @drawAgain()
 
 
-    myCanvas[0].width = 600
-    myCanvas[0].height = 600
+    myCanvas[0].width = 500
+    myCanvas[0].height = 500
 
     myCanvas.mousedown (event) ->
       # $(this).css('cursor', 'none')
@@ -115,22 +115,6 @@ ViewAndCreateDoodles =
     finishButton.click (event) =>
       event.preventDefault()
       @saveImage()
-
-    # this.createImage()
-
-  # # this turns the canvas data into a Blob (large binary object)
-  # createBlob: (imageData) ->
-  #   binary = atob(imageDAta.split(',')[1]);
-  #   array = []
-  #   i = 0
-
-  #   while i < binary.length
-  #     array.push binary.charCodeAt(i)
-  #     i++
-
-  #   new Blob([new Uint8Array(array)],
-  #     type: 'image/png'
-  #   )
 
   saveImage: ->
     drawingData = $('#my-canvas')[0].toDataURL()

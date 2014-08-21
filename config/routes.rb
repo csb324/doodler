@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     resources :doodles
   end
 
+  resource :vote, only: :update
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
