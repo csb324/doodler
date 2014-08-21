@@ -8,9 +8,9 @@ feature 'Guest creates an account' do
     fill_in 'Email', with: Faker::Internet.email
     @password = Faker::Lorem.words(3).join
     fill_in 'Password', with: @password
-    fill_in 'Confirm Password', with: @password
+    fill_in 'Password confirmation', with: @password
 
-    click_link 'Sign up'
+    click_button 'Sign up'
 
     expect(page).to have_content "welcome"
   end
