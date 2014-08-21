@@ -130,10 +130,8 @@ ViewAndCreateDoodles =
 
   saveImage: ->
     drawingData = $('#my-canvas')[0].toDataURL()
-    @createBlob(drawingData)
+    file = @createBlob(drawingData)
 
-    file = @createImage()
-    console.log(file)
 
   drawAgain: ->
     this.paint = false;
