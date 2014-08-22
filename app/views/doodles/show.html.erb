@@ -7,9 +7,14 @@
 <div id="comment-area">
   <h3>Comments</h4>
   <% @doodle.comments.each do |comment| %>
-    <div>
+    <div class="comment" data-commentid="<%= comment.id %>">
       <h5><%= comment.user.name %> </h5>
       <p><%= comment.body %> </p>
+      <div>
+        <a href="#" class="vote on-comment" data-votedirection="1">Upvote</a>
+        or <a href="#" class="vote on-comment" data-votedirection="-1">Downvote</a>
+        <p><span class="this-score"><%= comment.points %></span> points</p>
+      </div>
     </div>
   <% end %>
 </div>

@@ -1,1 +1,1 @@
-DOING RIGHT NOW: add a serializer (for user data in json)
+DOING RIGHT NOW: make comments votable AND USE RSPEC DAMN IT
