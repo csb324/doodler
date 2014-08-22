@@ -55,6 +55,9 @@ gem 'handlebars_assets'
 
 gem 'active_model_serializers'
 
+#hopefully this will replace gem 'random-word'
+gem 'wordnik'
+
 group :development, :test do
   gem 'jasmine-rails'
   gem 'rspec-rails'
