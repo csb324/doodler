@@ -8,7 +8,7 @@ ViewAndCreateDoodles =
       @missionId = doodlesBox.data("mission")
       @getDoodles()
 
-    $('#begin-drawing').click (event) =>
+    $('.buttons').on "click", "#begin-drawing", (event) =>
       event.preventDefault()
       @initializeDrawing()
 
@@ -20,15 +20,16 @@ ViewAndCreateDoodles =
       type: 'GET'
       dataType: 'json'
       success: (doodles) ->
-        console.log(doodles)
         $('#doodles').empty()
+
         doodles.forEach (doodle) ->
           oneDoodle = HandlebarsTemplates.doodles(doodle)
           $('#doodles').append(oneDoodle)
 
   createDoodleButton: ->
     createDoodle = $('<button>').attr("id", "begin-drawing").text("doodle it!")
-    $('#buttons').append(createDoodle)
+    $('.buttons').empty()
+    $('#doodleit').append(createDoodle)
 
   initializeDrawing: ->
     console.log("drawing area initialized")
@@ -48,16 +49,22 @@ ViewAndCreateDoodles =
 
     showButton = $('<button>').attr("id", "show-this").text("show")
     startOver = $('<button>').attr("id", "start-over").text("start over")
+    goBack = $('<button>').attr("id", "go-back").text("go back")
 
-    $('#buttons').empty().append(showButton).append(startOver)
+    $('.buttons').empty()
+    $('#finish-doodle').append(showButton).append(startOver).append(goBack)
 
-    $('#show-this').click (event) =>
+    showButton.click (event) =>
       event.preventDefault()
       @finishDrawing()
 
-    $('#start-over').click (event) =>
+    startOver.click (event) =>
       event.preventDefault()
       @drawAgain()
+
+    goBack.click (event) =>
+      event.preventDefault()
+      @getDoodles()
 
 
     myCanvas[0].width = 500
@@ -108,16 +115,28 @@ ViewAndCreateDoodles =
       this.context.stroke()
 
   finishDrawing: ->
-    this.redraw()
+    @redraw()
+    $('.buttons').empty()
     $('#my-canvas')[0].style.webkitFilter = "blur(25px)"
-    finishButton = $('<button>').attr("id", "confirm").text("are you sure?")
+    @addConfirmButtons()
 
-    finishButton.css("position", "absolute").css("left", "200px").css("top", "200px")
-    $('#doodles').append(finishButton)
+  addConfirmButtons: ->
+    buttonsContainer = $('<div>')
+    finishButton = $('<button>').attr("id", "confirm").text("submit!")
+    startOverButton = $('<button>').attr("id", "nevermind").text("start over")
+
+    buttonsContainer.append(finishButton).append(startOverButton)
+
+    buttonsContainer.css("position", "absolute").css("left", "200px").css("top", "200px")
+    $('#doodles').append(buttonsContainer)
 
     finishButton.click (event) =>
       event.preventDefault()
       @saveImage()
+
+    startOverButton.click (event) =>
+      event.preventDefault()
+      @drawAgain()
 
   saveImage: ->
     drawingData = $('#my-canvas')[0].toDataURL()

@@ -1,10 +1,13 @@
 <h1><%= @mission.name %></h1>
 
 <% if user_signed_in? %>
-  <div id="buttons">
+  <div class="buttons" id="doodleit">
   </div>
 <% end %>
 
 <div id="doodles" data-mission=<%= @mission.id %>>
-
 </div>
+
+<div class="buttons" id="finish-doodle">
+</div>
+
