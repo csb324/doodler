@@ -3,6 +3,7 @@ $(document).ready ->
 
 VoteAndComment =
   initialize: ->
+
     $(document).on "click", ".vote", (event) ->
       event.preventDefault()
       VoteAndComment.doodleId = $(@).parents(".single-doodle").data("doodleid")
