@@ -1,10 +1,20 @@
 <h1><%= @doodle.user.name %>'s <%= @doodle.mission.name %></h1>
 
-<div id="doodle"></div>
+<div id="doodle-area" class="single-doodle" data-doodleid="<%= @doodle.id %>">
+  <%= image_tag @doodle.image.url %>
+</div>
 
-<div id="comment-area"></div>
+<div id="comment-area">
+  <h3>Comments</h4>
+  <% @doodle.comments.each do |comment| %>
+    <div>
+      <h5><%= comment.user.name %> </h5>
+      <p><%= comment.body %> </p>
+    </div>
+  <% end %>
+</div>
 
 <div id="comment-form">
   <textarea name="comment" id="comment-input"></textarea>
-  <button>add comment</button>
+  <button id="comment-button">add comment</button>
 </div>

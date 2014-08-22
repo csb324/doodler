@@ -15,6 +15,10 @@ Rails.application.routes.draw do
 
   resource :vote, only: :update
 
+  resources :doodles, only: [] do
+    resources :comments, only: [:index, :create, :destroy]
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
