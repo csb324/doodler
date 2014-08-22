@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
     where(auth.slice(:provider, :uid)).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
-      # user.name = auth.info.name
+      user.name = auth.info.name
     end
   end
 
