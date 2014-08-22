@@ -19,7 +19,9 @@
   <% end %>
 </div>
 
-<div id="comment-form">
-  <textarea name="comment" id="comment-input"></textarea>
-  <button id="comment-button">add comment</button>
-</div>
+<% if user_signed_in? %>
+  <div id="comment-form">
+    <textarea name="comment" id="comment-input"></textarea>
+    <button id="comment-button">add comment</button>
+  </div>
+<% end %>

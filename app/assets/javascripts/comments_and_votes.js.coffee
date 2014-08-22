@@ -19,7 +19,6 @@ CommentAndVote =
       text = $('#comment-input').val()
       @postComment(text) unless text == ""
 
-
   postDoodleVote: (value) ->
     $.ajax
       url: '/vote'

@@ -17,4 +17,11 @@ FactoryGirl.define do
     )
   end
 
+  factory :comment do
+    user
+    doodle
+    body { Faker::Lorem.words(10).join(" ") }
+  end
+
+
 end
