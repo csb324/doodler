@@ -18,7 +18,7 @@ feature 'User votes on a drawing', :js do
     expect(page).to_not have_link 'Downvote'
   end
 
-  scenario 'successfully up' do
+  scenario 'successfully' do
 
     sign_in_as(@user)
     visit root_path
@@ -27,8 +27,24 @@ feature 'User votes on a drawing', :js do
     within('.single-doodle', text: @userTwo.email) do
       expect(page).to have_content '0'
       click_link 'Upvote'
-
       expect(page).to have_content '1'
+      click_link 'Downvote'
+      expect(page).to have_content '-1'
     end
   end
+
+  scenario 'and can undo a vote' do
+    sign_in_as(@user)
+    visit root_path
+    click_link @mission.name
+
+    within('.single-doodle', text: @userTwo.email) do
+      expect(page).to have_content '0'
+      click_link 'Upvote'
+      expect(page).to have_content '1'
+      click_link 'Upvote'
+      expect(page).to have_content '0'
+    end
+  end
+
 end
