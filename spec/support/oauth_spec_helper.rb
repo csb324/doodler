@@ -1,5 +1,5 @@
 module OauthSpecHelper
   def login_with_oauth(service = :facebook)
-    visit "/auth/#{service}"
+    visit "users/auth/#{service}"
   end
 end
