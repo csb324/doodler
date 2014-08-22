@@ -8,11 +8,12 @@ ViewAndCreateDoodles =
       @missionId = doodlesBox.data("mission")
       @getDoodles()
 
-    $('#submit').click (event) =>
+    $('#begin-drawing').click (event) =>
       event.preventDefault()
       @initializeDrawing()
 
   getDoodles: ->
+    @createDoodleButton()
     thisMission = "/missions/#{@missionId}"
     $.ajax
       url: thisMission
@@ -25,11 +26,13 @@ ViewAndCreateDoodles =
           oneDoodle = HandlebarsTemplates.doodles(doodle)
           $('#doodles').append(oneDoodle)
 
+  createDoodleButton: ->
+    createDoodle = $('<button>').attr("id", "begin-drawing").text("doodle it!")
+    $('#buttons').append(createDoodle)
+
   initializeDrawing: ->
     console.log("drawing area initialized")
-
     @paint = false;
-
     @clickX = []
     @clickY = []
     @clickDrag = []
@@ -119,9 +122,6 @@ ViewAndCreateDoodles =
   saveImage: ->
     drawingData = $('#my-canvas')[0].toDataURL()
 
-    newImage = $('<img>').attr('src', drawingData)
-    $('#doodles').empty().append(newImage)
-
     $.ajax
       url: "/missions/#{@missionId}/doodles"
       type: "POST"
@@ -130,10 +130,14 @@ ViewAndCreateDoodles =
         doodle:
           imagedata: drawingData
           mission_id: @missionId
-      success: (doodle, status) ->
-        alert(status)
-        console.log(this)
+      error: ->
+        errormessage = $('<div>').text("oh no something went wrong")
+        $('#doodles').empty().append(errormessage)
+      success: (doodle) ->
         ViewAndCreateDoodles.getDoodles()
+        newImage = $('<img>').attr('src', drawingData)
+        $('#doodles').empty().append(newImage)
+
 
   drawAgain: ->
     this.paint = false;
