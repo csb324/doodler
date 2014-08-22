@@ -8,7 +8,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       render status: 200, json: { user: { email: @user.email }}
     else
       session["devise.facebook_data"] = request.env["omniauth.auth"]
-
       render status: 401, json: {errors: alert}
     end
   end
