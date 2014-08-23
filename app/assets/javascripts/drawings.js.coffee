@@ -38,6 +38,9 @@ ViewAndCreateDoodles =
     @clickY = []
     @clickDrag = []
 
+    if @interval
+      clearInterval(@interval)
+
     @drawingEnvironment()
 
   drawingEnvironment: ->
@@ -50,9 +53,17 @@ ViewAndCreateDoodles =
     showButton = $('<button>').attr("id", "show-this").text("show")
     startOver = $('<button>').attr("id", "start-over").text("start over")
     goBack = $('<button>').attr("id", "go-back").text("go back")
+    timer = $('<div>').attr("id", "timer")
+
+    @startTimer()
+
 
     $('.buttons').empty()
-    $('#finish-doodle').append(showButton).append(startOver).append(goBack)
+    $('#finish-doodle')
+      .append(showButton)
+      .append(startOver)
+      .append(goBack)
+      .append(timer)
 
     showButton.click (event) =>
       event.preventDefault()
@@ -60,7 +71,7 @@ ViewAndCreateDoodles =
 
     startOver.click (event) =>
       event.preventDefault()
-      @drawAgain()
+      @initializeDrawing()
 
     goBack.click (event) =>
       event.preventDefault()
@@ -82,11 +93,11 @@ ViewAndCreateDoodles =
       if ViewAndCreateDoodles.paint
         ViewAndCreateDoodles.addClick(event.pageX - this.offsetLeft, event.pageY - this.offsetTop, true)
 
-    myCanvas.mouseup ->
-      ViewAndCreateDoodles.paint = false
+    myCanvas.mouseup (event) =>
+      @paint = false
 
-    myCanvas.mouseleave ->
-      ViewAndCreateDoodles.paint = false
+    myCanvas.mouseleave (event) =>
+      @paint = false
 
 
   addClick: (x, y, dragging) ->
@@ -115,6 +126,9 @@ ViewAndCreateDoodles =
       this.context.stroke()
 
   finishDrawing: ->
+    clearInterval(@interval)
+
+    window.seconds = 0
     @redraw()
     $('.buttons').empty()
     $('#my-canvas')[0].style.webkitFilter = "blur(25px)"
@@ -136,7 +150,7 @@ ViewAndCreateDoodles =
 
     startOverButton.click (event) =>
       event.preventDefault()
-      @drawAgain()
+      @initializeDrawing()
 
   saveImage: ->
     drawingData = $('#my-canvas')[0].toDataURL()
@@ -157,13 +171,24 @@ ViewAndCreateDoodles =
         newImage = $('<img>').attr('src', drawingData)
         $('#doodles').empty().append(newImage)
 
+  startTimer: ->
+    console.log("setting the interval")
+    @interval = undefined
+    window.seconds = 0
+    @interval = setInterval(@addSecond, 1000)
+    console.log("the interval id is #{@interval}")
 
-  drawAgain: ->
-    this.paint = false;
+  addSecond: =>
+    timerbox = $('#timer')
+    @seconds += 1
+    timerbox.text(@seconds)
 
-    this.clickX = []
-    this.clickY = []
-    this.clickDrag = []
+    if @seconds >= 15
+      ViewAndCreateDoodles.finishDrawing()
 
-    this.drawingEnvironment()
+
+
+
+
+
 
