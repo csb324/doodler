@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook]
 
-  has_many :doodles
+  has_many :doodles, dependent: :destroy
   has_many :missions
   has_many :comments
 

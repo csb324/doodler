@@ -19,6 +19,14 @@ Rails.application.routes.draw do
     resources :comments, only: [:index, :create, :destroy]
   end
 
+  match '/users/:id/finish_signup' => 'users#finish_signup',
+    via: [:get, :patch],
+    as: :finish_signup
+
+  match '/users/:id/first_sign_in' => 'users#first_sign_in',
+    via: [:get, :patch],
+    as: :first_sign_in
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
