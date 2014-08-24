@@ -1,10 +1,21 @@
-<div class="single-doodle small-6 columns" data-doodleId="{{id}}">
-  <img src="{{uploaded_image}}" alt="{{user.name}}'s doodle">
-  <h4><a href="/missions/{{mission_id}}/doodles/{{id}}">by {{user.name}}</a></h4>
-  <p><span class="this-score">{{points}}</span> points</p>
-  <p>
+<div class="single-doodle row" data-doodleId="{{id}}">
+  <div class="medium-1 column">
+    <p>
     <a class="vote on-doodle" href="#" data-votedirection="1">Upvote</a>
     or
     <a class="vote on-doodle" href="#" data-votedirection="-1">Downvote</a>
   </p>
+  </div>
+
+  <div class="medium-11 columns">
+    <img src="{{uploaded_image}}" alt="{{user.name}}'s doodle">
+    <h4>
+      <a href="/missions/{{mission_id}}/doodles/{{id}}">by {{user.name}}</a>
+    </h4>
+    <p><span class="this-score">{{points}}</span> points</p>
+  </div>
+
 </div>
+
+
+

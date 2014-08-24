@@ -20,9 +20,27 @@
 @import url(http://fonts.googleapis.com/css?family=Noto+Sans:400,700|Loved+by+the+King);
 
 $handwriting: 'Loved By The King', cursive;
+$red: #EF2D35;
+$blue: #4980D3;
+$yellow: #EECB57;
+$pink: #EC9EC6;
+$teal: #42C7AC;
+
+body {
+  background: black;
+  color: white;
+}
+
+.top-bar .row.navbar-row {
+  max-width: 62.5rem;
+}
 
 .name h1 {
-  font-family: $handwriting
+  font-family: $handwriting;
+}
+
+.sample-doodle {
+  width: 100%;
 }
 
 #doodleit, .mission-name {
@@ -31,8 +49,27 @@ $handwriting: 'Loved By The King', cursive;
 
 canvas {
   border: 1px solid black;
+  background: white;
+}
+
+button {
+  padding: 12px;
+  margin-top: 5px;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+#doodleit {
+  float: right;
 }
 
 .active-doodling {
   text-align: center;
+}
+
+#finish-doodle {
+  text-align: center;
+  #timer {
+    display: inline-block;
+  }
 }

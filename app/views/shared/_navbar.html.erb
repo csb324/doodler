@@ -1,5 +1,5 @@
 <nav class="top-bar">
-  <div class="row">
+  <div class="row navbar-row">
   <ul class="title-area">
     <li class="name"><h1><%= link_to 'DoodleMission', root_path %></h1></li>
   </ul>
@@ -11,8 +11,9 @@
         <li><a href="#">Signed in as <%= current_user.email %></a></li>
         <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
       <% else %>
-        <li><%= link_to 'Sign in', new_user_session_path %></li>
-        <li><%= link_to 'Sign up', new_user_registration_path %> </li>
+        <li>
+          <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
+        </li>
       <% end %>
 
     </ul>

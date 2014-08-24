@@ -1,1 +1,1 @@
-DOING RIGHT NOW: make comments votable AND USE RSPEC DAMN IT
+DOING RIGHT NOW: looking at the timer

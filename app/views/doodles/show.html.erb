@@ -1,3 +1,5 @@
+<div class="row">
+<div class="column">
 <h1><%= @doodle.user.name %>'s <%= @doodle.mission.name %></h1>
 
 <div id="doodle-area" class="single-doodle" data-doodleid="<%= @doodle.id %>">
@@ -5,7 +7,7 @@
 </div>
 
 <div id="comment-area">
-  <h3>Comments</h4>
+  <h3>Comments</h3>
   <% @doodle.comments.each do |comment| %>
     <div class="comment" data-commentid="<%= comment.id %>">
       <h5><%= comment.user.name %> </h5>
@@ -25,3 +27,5 @@
     <button id="comment-button">add comment</button>
   </div>
 <% end %>
+</div>
+</div>

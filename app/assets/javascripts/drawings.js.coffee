@@ -28,12 +28,13 @@ ViewAndCreateDoodles =
 
 
   createDoodleButton: ->
-    createDoodle = $('<button>').attr("id", "begin-drawing").text("doodle it!")
+    createDoodle = $('<button>')
+      .attr("id", "begin-drawing")
+      .text("doodle it!")
     $('.buttons').empty()
     $('#doodleit').append(createDoodle)
 
   initializeDrawing: ->
-    console.log("drawing area initialized")
     @paint = false;
     @clickX = []
     @clickY = []
@@ -44,20 +45,11 @@ ViewAndCreateDoodles =
 
     @drawingEnvironment()
 
-  drawingEnvironment: ->
-    console.log("creating the drawing environment")
-    myCanvas = $('<canvas>').attr("id", "my-canvas")
-    $('#doodles').empty().addClass("active-doodling").append(myCanvas)
-
-    @context = myCanvas[0].getContext('2d')
-
+  buildDrawingButtons: ->
     showButton = $('<button>').attr("id", "show-this").text("show")
     startOver = $('<button>').attr("id", "start-over").text("start over")
     goBack = $('<button>').attr("id", "go-back").text("go back")
-    timer = $('<div>').attr("id", "timer")
-
-    @startTimer()
-
+    timer = $('<div>').attr("id", "timer").text("1:00")
 
     $('.buttons').empty()
     $('#finish-doodle')
@@ -78,6 +70,16 @@ ViewAndCreateDoodles =
       event.preventDefault()
       @getDoodles()
 
+  drawingEnvironment: ->
+    console.log("creating the drawing environment")
+    myCanvas = $('<canvas>').attr("id", "my-canvas")
+    $('#doodles').empty().addClass("active-doodling").append(myCanvas)
+
+    @context = myCanvas[0].getContext('2d')
+
+
+    @buildDrawingButtons()
+    @startTimer()
 
     myCanvas[0].width = 500
     myCanvas[0].height = 500
@@ -103,33 +105,35 @@ ViewAndCreateDoodles =
 
   addClick: (x, y, dragging) ->
     console.log("adding a click")
-    this.clickY.push(y)
-    this.clickX.push(x)
-    this.clickDrag.push(dragging)
+    @clickY.push(y)
+    @clickX.push(x)
+    @clickDrag.push(dragging)
 
   redraw: ->
-    this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height)
-    this.context.strokeStyle = "#000"
-    this.context.lineJoin = "round"
-    this.context.lineWidth = 5
+    @context.clearRect(0, 0, @context.canvas.width, @context.canvas.height)
+    @context.rect(0, 0, @context.canvas.width, @context.canvas.height)
+    @context.fillStyle = '#fff'
+    @context.fill()
 
-    for value, i in this.clickX
-      this.context.beginPath()
+    @context.strokeStyle = "#000"
+    @context.lineJoin = "round"
+    @context.lineWidth = 5
 
-      if this.clickDrag[i] && i
-        this.context.moveTo(this.clickX[i-1], this.clickY[i-1]);
+    for value, i in @clickX
+      @context.beginPath()
+
+      if @clickDrag[i] && i
+        @context.moveTo(@clickX[i-1], @clickY[i-1]);
       else
-        this.context.moveTo(value-1, this.clickY[i]);
+        @context.moveTo(value-1, @clickY[i]);
 
-      this.context.lineTo(value, this.clickY[i])
-      this.context.closePath()
+      @context.lineTo(value, @clickY[i])
+      @context.closePath()
 
-      this.context.stroke()
+      @context.stroke()
 
   finishDrawing: ->
     clearInterval(@interval)
-
-    window.seconds = 0
     @redraw()
     $('.buttons').empty()
     $('#my-canvas')[0].style.webkitFilter = "blur(25px)"
@@ -169,22 +173,30 @@ ViewAndCreateDoodles =
         $('#doodles').empty().append(errormessage)
       success: (doodle) ->
         ViewAndCreateDoodles.getDoodles()
-        newImage = $('<img>').attr('src', drawingData)
-        $('#doodles').empty().append(newImage)
 
   startTimer: ->
+    if @interval
+      clearInterval(@interval)
+    # for some reason this line is also necessary or the timer goes double speed
     @interval = undefined
-    window.seconds = 0
+
+    window.seconds = 60
     @interval = setInterval(@addSecond, 1000)
 
   addSecond: =>
     timerbox = $('#timer')
-    @seconds += 1
-    timerbox.text(@seconds)
+    @seconds -= 1
 
-    if @seconds >= 15
+    # the most basic time-formatting ever bc we're only dealing with 0-30
+    if @seconds < 10
+      displayseconds = "0:0" + @seconds
+    else
+      displayseconds = "0:" + @seconds
+
+    timerbox.text(displayseconds)
+
+    if @seconds == 0
       ViewAndCreateDoodles.finishDrawing()
-
 
 
 
