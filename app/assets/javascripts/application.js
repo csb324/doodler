@@ -13,5 +13,8 @@
 //= require handlebars.runtime
 //= require jquery
 //= require jquery_ujs
+//= require foundation
 //= require_tree ./templates
 //= require_tree .
+
+$(function(){ $(document).foundation(); });

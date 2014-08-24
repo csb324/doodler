@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>DoodleMission</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<%= render 'shared/navbar' %>
+    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
 
-<div class="row">
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
 
-<%= yield %>
-</div>
+  <body>
 
-</body>
+    <%= render 'shared/navbar' %>
+    <%= yield %>
+    <%= javascript_include_tag "application" %>
+
+  </body>
 </html>

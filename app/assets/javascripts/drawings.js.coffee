@@ -20,11 +20,12 @@ ViewAndCreateDoodles =
       type: 'GET'
       dataType: 'json'
       success: (doodles) ->
-        $('#doodles').empty()
+        $('#doodles').empty().removeClass("active-doodling")
 
         doodles.forEach (doodle) ->
           oneDoodle = HandlebarsTemplates.doodles(doodle)
           $('#doodles').append(oneDoodle)
+
 
   createDoodleButton: ->
     createDoodle = $('<button>').attr("id", "begin-drawing").text("doodle it!")
@@ -46,7 +47,7 @@ ViewAndCreateDoodles =
   drawingEnvironment: ->
     console.log("creating the drawing environment")
     myCanvas = $('<canvas>').attr("id", "my-canvas")
-    $('#doodles').empty().append(myCanvas)
+    $('#doodles').empty().addClass("active-doodling").append(myCanvas)
 
     @context = myCanvas[0].getContext('2d')
 
@@ -172,11 +173,9 @@ ViewAndCreateDoodles =
         $('#doodles').empty().append(newImage)
 
   startTimer: ->
-    console.log("setting the interval")
     @interval = undefined
     window.seconds = 0
     @interval = setInterval(@addSecond, 1000)
-    console.log("the interval id is #{@interval}")
 
   addSecond: =>
     timerbox = $('#timer')

@@ -1,13 +1,19 @@
-<h1><%= @mission.name %></h1>
+<div class="row">
+  <div class="small-12 columns">
+    <h1 class="mission-name"><%= @mission.name %></h1>
 
-<% if user_signed_in? %>
-  <div class="buttons" id="doodleit">
+    <% if user_signed_in? %>
+      <div class="buttons" id="doodleit">
+      </div>
+    <% end %>
   </div>
-<% end %>
 
-<div id="doodles" data-mission=<%= @mission.id %>>
-</div>
 
-<div class="buttons" id="finish-doodle">
+  <div id="doodles" data-mission=<%= @mission.id %>>
+  </div>
+
+  <div class="buttons small-12 columns" id="finish-doodle">
+  </div>
+
 </div>
 
