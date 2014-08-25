@@ -157,8 +157,9 @@ ViewAndCreateDoodles =
       error: ->
         errormessage = $('<div>').text("oh no something went wrong")
         $('#doodles').empty().append(errormessage)
-      success: (doodle) ->
-        alert("THIS WORKED OMG OMG OMG")
+      success: (data) ->
+        console.log(data)
+        window.location = "/doodles/#{data.doodle.id}"
 
   startTimer: ->
     if @interval

@@ -1,6 +1,10 @@
 <div class="row">
 <div class="column">
-<h1><%= @doodle.user.name %>'s <%= @doodle.mission.name %></h1>
+<% if @doodle.doodleable_type == "Mission" %>
+  <h1><%= @doodle.user.nickname %>'s <%= @doodle.doodleable.name %></h1>
+<% else %>
+  <h1><%= @doodle.user.nickname %></h1>
+<% end %>
 
 <div id="doodle-area" class="single-doodle" data-doodleid="<%= @doodle.id %>">
   <%= image_tag @doodle.image.url %>
