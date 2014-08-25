@@ -44,7 +44,11 @@ gem 'koala'
 
 # image uploading
 gem 'carrierwave'
-gem 'fog'
+
+# gem 'fog'
+# replacing fog with carrierwave-aws because of that timeout socket issue
+gem 'carrierwave-aws'
+
 gem 'rmagick', require: false
 gem 'aws-sdk'
 gem 'dotenv-rails'

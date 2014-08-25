@@ -1,12 +1,13 @@
 CarrierWave.configure do |config|
-  config.fog_credentials = {
-    :provider => 'AWS',
-    :aws_access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-    :aws_secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+  config.storage = :aws
+  config.aws_bucket = ENV['S3_BUCKET']
+  config.aws_credentials = {
+    access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+    secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
   }
-  config.fog_directory = ENV['S3_BUCKET']
 end
 
+# Testing carrierwave
 if Rails.env.test? || Rails.env.cucumber?
   CarrierWave.configure do |config|
     config.storage = :file

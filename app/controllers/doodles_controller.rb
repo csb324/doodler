@@ -17,6 +17,7 @@ class DoodlesController < ApplicationController
     @doodle.doodleable = doodleable
 
     @doodle.save
+    respond_with @doodle
     # if params[:doodleable_type] == "Mission"
     #   respond_with doodleable
     # else

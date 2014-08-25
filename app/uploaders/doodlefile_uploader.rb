@@ -8,7 +8,7 @@ class DoodlefileUploader < CarrierWave::Uploader::Base
 
   # Choose what kind of storage to use for this uploader:
   # storage :file
-  storage :fog
+  storage :aws
 
   def extension_white_list
     %w(jpg jpeg gif png)
