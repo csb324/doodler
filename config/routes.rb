@@ -27,6 +27,8 @@ Rails.application.routes.draw do
     via: [:get, :patch],
     as: :first_sign_in
 
+  resources :users, only: [:show]
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
