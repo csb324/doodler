@@ -6,7 +6,7 @@ CreateDoodles =
     @doodleableType = $('.drawing-environment-hide').data("doodleable-type")
     @doodleableId = $('.drawing-environment-hide').data("doodleable-id")
 
-    $('.buttons').on "click", "#begin-drawing", (event) =>
+    $('#begin-drawing').click (event) =>
       event.preventDefault()
       @initializeDrawing()
 
@@ -42,14 +42,15 @@ CreateDoodles =
 
     goBack.click (event) =>
       event.preventDefault()
-      @getDoodles()
+      $('.drawing-environment-hide').show()
+      $('.drawing-environment-show').hide()
 
   drawingEnvironment: ->
     console.log("creating the drawing environment")
     myCanvas = $('<canvas>').attr("id", "my-canvas")
     $('.drawing-environment-hide').hide()
-    $('.drawing-environment-show').find('canvas').remove()
-    $('.drawing-environment-show').append(myCanvas)
+    $('.drawing-environment').show().find('canvas').remove()
+    $('.drawing-environment').append(myCanvas)
 
     @buildDrawingButtons()
     @context = myCanvas[0].getContext('2d')
@@ -124,7 +125,7 @@ CreateDoodles =
     buttonsContainer.append(finishButton).append(startOverButton)
 
     buttonsContainer.css("position", "absolute").css("left", "200px").css("top", "200px")
-    $('.drawing-environment-show').append(buttonsContainer)
+    $('.drawing-environment').append(buttonsContainer)
 
     finishButton.click (event) =>
       event.preventDefault()
@@ -176,7 +177,6 @@ CreateDoodles =
     timerbox.text(displayseconds)
     if @seconds == 0
       CreateDoodles.finishDrawing()
-
 
 
 
