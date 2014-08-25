@@ -32,6 +32,14 @@ class User < ActiveRecord::Base
     Friendship.create(user: self, friend: new_friend)
   end
 
+  def points
+    if doodles.present?
+      doodles.map(&:points).reduce(&:+)
+    else
+      0
+    end
+  end
+
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
       user.email = auth.info.email
