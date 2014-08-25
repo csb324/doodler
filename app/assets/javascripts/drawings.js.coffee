@@ -32,7 +32,8 @@ ViewAndCreateDoodles =
       .attr("id", "begin-drawing")
       .text("doodle it!")
     $('.buttons').empty()
-    $('#doodleit').append(createDoodle)
+    doodleIt = $('#doodleit')
+    doodleIt.append(createDoodle)
 
   initializeDrawing: ->
     @paint = false;
@@ -181,13 +182,13 @@ ViewAndCreateDoodles =
     @interval = undefined
 
     window.seconds = 60
-    @interval = setInterval(@addSecond, 1000)
+    @interval = setInterval(@countSecond, 1000)
 
-  addSecond: =>
+  countSecond: =>
     timerbox = $('#timer')
     @seconds -= 1
 
-    # the most basic time-formatting ever bc we're only dealing with 0-30
+    # the most basic time-formatting ever bc we're only dealing with 0-60
     if @seconds < 10
       displayseconds = "0:0" + @seconds
     else
@@ -197,8 +198,6 @@ ViewAndCreateDoodles =
 
     if @seconds == 0
       ViewAndCreateDoodles.finishDrawing()
-
-
 
 
 

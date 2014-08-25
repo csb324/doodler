@@ -52,15 +52,20 @@ canvas {
   background: white;
 }
 
-button {
+button, .button {
   padding: 12px;
   margin-top: 5px;
   margin-left: 2px;
   margin-right: 2px;
 }
 
-#doodleit {
+#begin-drawing {
   float: right;
+}
+
+.button_to {
+  float: right;
+  display: inline-block;
 }
 
 .active-doodling {

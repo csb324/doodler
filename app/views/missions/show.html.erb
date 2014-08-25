@@ -3,9 +3,13 @@
   <div class="columns">
     <h1 class="mission-name"><%= @mission.name %></h1>
 
-    <% if user_signed_in? %>
+    <% if user_signed_in? && @mission.open? %>
       <div class="buttons" id="doodleit">
       </div>
+    <% elsif !@mission.open? %>
+      <button href="#" id="begin-drawing" class="disabled">Mission closed</button>
+    <% elsif !user_signed_in? %>
+      <%= button_to "Sign in with facebook", user_omniauth_authorize_path(:facebook), class: "button", id: "begin-drawing" %>
     <% end %>
   </div>
 </div>

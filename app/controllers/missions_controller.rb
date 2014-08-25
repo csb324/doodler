@@ -7,8 +7,9 @@ class MissionsController < ApplicationController
   end
 
   def index
-    @missions = Mission.all
-    respond_with(@missions)
+    # these are the missions created in the last 24 hours! others are closed.
+    @missions = Mission.where("created_at <= :now AND created_at >= :yesterday",
+      {now: Time.now(), yesterday: Time.now() - 1.day })
   end
 
   def show
