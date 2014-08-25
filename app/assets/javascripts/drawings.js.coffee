@@ -1,25 +1,14 @@
 $(document).ready ->
-  ViewAndCreateDoodles.initialize()
+  CreateDoodles.initialize()
 
-ViewAndCreateDoodles =
+CreateDoodles =
   initialize: ->
-    doodlesBox = $('#doodles')
-    if doodlesBox.length > 0
-      @missionId = doodlesBox.data("doodleable-id")
-
-    @createDoodleButton()
+    @doodleableType = $('.drawing-environment-hide').data("doodleable-type")
+    @doodleableId = $('.drawing-environment-hide').data("doodleable-id")
 
     $('.buttons').on "click", "#begin-drawing", (event) =>
       event.preventDefault()
       @initializeDrawing()
-
-  createDoodleButton: ->
-    createDoodle = $('<button>')
-      .attr("id", "begin-drawing")
-      .text("doodle it!")
-    $('.buttons').empty()
-    doodleIt = $('#doodleit')
-    doodleIt.append(createDoodle)
 
   initializeDrawing: ->
     @paint = false;
@@ -58,12 +47,13 @@ ViewAndCreateDoodles =
   drawingEnvironment: ->
     console.log("creating the drawing environment")
     myCanvas = $('<canvas>').attr("id", "my-canvas")
-    $('#doodles').empty().addClass("active-doodling").append(myCanvas)
-
-    @context = myCanvas[0].getContext('2d')
-
+    $('.drawing-environment-hide').hide()
+    $('.drawing-environment-show').find('canvas').remove()
+    $('.drawing-environment-show').append(myCanvas)
 
     @buildDrawingButtons()
+    @context = myCanvas[0].getContext('2d')
+
     @startTimer()
 
     myCanvas[0].width = 500
@@ -71,15 +61,17 @@ ViewAndCreateDoodles =
 
     myCanvas.mousedown (event) ->
       # $(this).css('cursor', 'none')
-      mouseX = event.pageX - this.offsetLeft
-      mouseY = event.pageY - this.offsetTop
-      ViewAndCreateDoodles.paint = true
+      mouseX = event.pageX - $(this).offset().left
+      mouseY = event.pageY - $(this).offset().top
+      CreateDoodles.paint = true
 
-      ViewAndCreateDoodles.addClick(mouseX, mouseY)
+      CreateDoodles.addClick(mouseX, mouseY)
 
     myCanvas.mousemove (event) ->
-      if ViewAndCreateDoodles.paint
-        ViewAndCreateDoodles.addClick(event.pageX - this.offsetLeft, event.pageY - this.offsetTop, true)
+      if CreateDoodles.paint
+        mouseX = event.pageX - $(this).offset().left
+        mouseY = event.pageY - $(this).offset().top
+        CreateDoodles.addClick(mouseX, mouseY, true)
 
     myCanvas.mouseup (event) =>
       @paint = false
@@ -125,14 +117,14 @@ ViewAndCreateDoodles =
     @addConfirmButtons()
 
   addConfirmButtons: ->
-    buttonsContainer = $('<div>')
+    buttonsContainer = $('<div>').addClass("buttons")
     finishButton = $('<button>').attr("id", "confirm").text("submit!")
     startOverButton = $('<button>').attr("id", "nevermind").text("start over")
 
     buttonsContainer.append(finishButton).append(startOverButton)
 
     buttonsContainer.css("position", "absolute").css("left", "200px").css("top", "200px")
-    $('#doodles').append(buttonsContainer)
+    $('.drawing-environment-show').append(buttonsContainer)
 
     finishButton.click (event) =>
       event.preventDefault()
@@ -152,8 +144,9 @@ ViewAndCreateDoodles =
       data:
         doodle:
           imagedata: drawingData
-        mission_id: @missionId
-        doodleable_type: "Mission"
+        doodleable_id: @doodleableId
+        doodleable_type: @doodleableType
+
       error: ->
         errormessage = $('<div>').text("oh no something went wrong")
         $('#doodles').empty().append(errormessage)
@@ -182,7 +175,7 @@ ViewAndCreateDoodles =
 
     timerbox.text(displayseconds)
     if @seconds == 0
-      ViewAndCreateDoodles.finishDrawing()
+      CreateDoodles.finishDrawing()
 
 
 

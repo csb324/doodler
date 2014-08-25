@@ -23,13 +23,17 @@ class DoodlesController < ApplicationController
 
   private
 
-  # these methods are here so i can pass a base64 string into the json
-  # and upload them to carrierwave as an image file
-
   def doodleable
-    doodleable_id = params["#{params[:doodleable_type].underscore}_id"]
+    if params[:doodleable_id]
+      doodleable_id = params[:doodleable_id]
+    else
+      doodleable_id = params["#{params[:doodleable_type].underscore}_id"]
+    end
     params[:doodleable_type].constantize.find(doodleable_id)
   end
+
+  # these methods are here so i can pass a base64 string into the json
+  # and upload them to carrierwave as an image file
 
   def convert_data_uri_to_upload(image_string)
     image_data = split_base64(image_string)

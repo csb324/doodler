@@ -1,7 +1,27 @@
 <div class="row">
-  <div class="column">
+
+  <% if @user.profile_pictures.present? %>
+    <div class="columns medium-3">
+      <%= image_tag @user.profile_pictures.first.image.url %>
+    </div>
+  <% end %>
+
+  <div class="columns medium-9">
     <h1><%= @user.nickname %></h1>
     <p><%= @user.points %> points</p>
     <p>Doodler since <%= @user.created_at.strftime("%B %e, %Y") %></p>
+    <div class="buttons">
+      <button id="begin-drawing">Draw a new profile picture</button>
+    </div>
+
+    <div id="profile-statistics" class="drawing-environment-hide" data-doodleable-id=<%= @user.id %> data-doodleable-type="User">
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="drawing-environment-show column">
+    <div class="buttons" id="finish-doodle">
+    </div>
   </div>
 </div>

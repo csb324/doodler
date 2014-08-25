@@ -5,16 +5,18 @@
 
     <% if user_signed_in? && @mission.open? %>
       <div class="buttons" id="doodleit">
+        <button id="begin-drawing">doodle it!</button>
       </div>
     <% elsif !@mission.open? %>
-      <button href="#" id="begin-drawing" class="disabled">Mission closed</button>
+      <button href="#" class="disabled">Mission closed</button>
     <% elsif !user_signed_in? %>
-      <%= button_to "Sign in with facebook", user_omniauth_authorize_path(:facebook), class: "button", id: "begin-drawing" %>
+      <%= button_to "Sign in with facebook", user_omniauth_authorize_path(:facebook), class: "button" %>
     <% end %>
   </div>
 </div>
 
 <div id="doodles" class="drawing-environment-hide" data-doodleable-id=<%= @mission.id %> data-doodleable-type="Mission">
+
   <% @doodles.each do |doodle| %>
     <div class="single-doodle row" data-doodleId=<%= doodle.id %> >
       <div class="medium-1 column">
@@ -35,8 +37,9 @@
   <% end %>
 </div>
 
-<div class="row">
-  <div class="buttons columns" id="finish-doodle">
+<div class="drawing-environment-show row">
+  <div class="column">
+    <div class="buttons" id="finish-doodle">
+    </div>
   </div>
 </div>
-
