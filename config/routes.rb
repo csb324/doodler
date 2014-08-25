@@ -9,13 +9,11 @@ Rails.application.routes.draw do
 
   root 'missions#index'
 
-  resources :missions do
-    resources :doodles
-  end
+  resources :missions
 
   resource :vote, only: :update
 
-  resources :doodles, only: [] do
+  resources :doodles do
     resources :comments, only: [:index, :create, :destroy]
   end
 

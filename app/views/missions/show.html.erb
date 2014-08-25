@@ -14,7 +14,25 @@
   </div>
 </div>
 
-<div id="doodles" data-mission=<%= @mission.id %>>
+<div id="doodles" class="drawing-environment-hide" data-doodleable-id=<%= @mission.id %> data-doodleable-type="Mission">
+  <% @doodles.each do |doodle| %>
+    <div class="single-doodle row" data-doodleId=<%= doodle.id %> >
+      <div class="medium-1 column">
+        <a class="vote on-doodle" href="#" data-votedirection="1"><i class="fa-caret-up fa"></i></a>
+        </br>
+        <a class="vote on-doodle" href="#" data-votedirection="-1"><i class="fa-caret-down fa"></i></a>
+      </p>
+      </div>
+
+      <div class="medium-11 columns">
+        <%= image_tag doodle.image.url %>
+        <h4>
+          <%= link_to "Created by #{doodle.user.nickname}", doodle %>
+        </h4>
+        <p><span class="this-score"><%= doodle.points %></span> points</p>
+      </div>
+    </div>
+  <% end %>
 </div>
 
 <div class="row">

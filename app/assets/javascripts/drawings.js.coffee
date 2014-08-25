@@ -5,27 +5,13 @@ ViewAndCreateDoodles =
   initialize: ->
     doodlesBox = $('#doodles')
     if doodlesBox.length > 0
-      @missionId = doodlesBox.data("mission")
-      @getDoodles()
+      @missionId = doodlesBox.data("doodleable-id")
+
+    @createDoodleButton()
 
     $('.buttons').on "click", "#begin-drawing", (event) =>
       event.preventDefault()
       @initializeDrawing()
-
-  getDoodles: ->
-    @createDoodleButton()
-    thisMission = "/missions/#{@missionId}"
-    $.ajax
-      url: thisMission
-      type: 'GET'
-      dataType: 'json'
-      success: (doodles) ->
-        $('#doodles').empty().removeClass("active-doodling")
-
-        doodles.forEach (doodle) ->
-          oneDoodle = HandlebarsTemplates.doodles(doodle)
-          $('#doodles').append(oneDoodle)
-
 
   createDoodleButton: ->
     createDoodle = $('<button>')
@@ -40,10 +26,8 @@ ViewAndCreateDoodles =
     @clickX = []
     @clickY = []
     @clickDrag = []
-
     if @interval
       clearInterval(@interval)
-
     @drawingEnvironment()
 
   buildDrawingButtons: ->
@@ -162,18 +146,19 @@ ViewAndCreateDoodles =
     drawingData = $('#my-canvas')[0].toDataURL()
 
     $.ajax
-      url: "/missions/#{@missionId}/doodles"
+      url: "/doodles"
       type: "POST"
       dataType: 'json'
       data:
         doodle:
           imagedata: drawingData
-          mission_id: @missionId
+        mission_id: @missionId
+        doodleable_type: "Mission"
       error: ->
         errormessage = $('<div>').text("oh no something went wrong")
         $('#doodles').empty().append(errormessage)
       success: (doodle) ->
-        ViewAndCreateDoodles.getDoodles()
+        alert("THIS WORKED OMG OMG OMG")
 
   startTimer: ->
     if @interval
@@ -195,7 +180,6 @@ ViewAndCreateDoodles =
       displayseconds = "0:" + @seconds
 
     timerbox.text(displayseconds)
-
     if @seconds == 0
       ViewAndCreateDoodles.finishDrawing()
 

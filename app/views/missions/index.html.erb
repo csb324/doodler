@@ -22,7 +22,9 @@
       <h4>your recent doodles</h4>
       <ul>
         <% current_user.doodles.each do |doodle| %>
-          <li><%= link_to doodle.mission.name, doodle.mission %></li>
+          <% if doodle.doodleable_type == "Mission" %>
+            <li><%= link_to doodle.doodleable.name, doodle %></li>
+          <% end %>
         <% end %>
       </ul>
     </div>
