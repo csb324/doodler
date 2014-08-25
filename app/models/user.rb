@@ -9,6 +9,19 @@ class User < ActiveRecord::Base
   has_many :missions
   has_many :comments
 
+  def friendships
+    Friendship.find_by_sql(
+      ["SELECT * FROM friendships WHERE user_id = :thisuser OR friend_id = :thisuser",
+        {thisuser: id}])
+  end
+
+  def friends
+    User.find_by_sql(
+      ["SELECT * FROM users u, friendships f WHERE (u.id = f.user_id AND f.friend_id = :thisuser) OR (u.id = f.friend_id AND f.user_id = :thisuser)",
+        {thisuser: id}
+      ])
+  end
+
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|
       user.email = auth.info.email
