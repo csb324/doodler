@@ -20,10 +20,16 @@ class User < ActiveRecord::Base
   end
 
   def friends
-    User.find_by_sql(
-      ["SELECT * FROM users u, friendships f WHERE (u.id = f.user_id AND f.friend_id = :thisuser) OR (u.id = f.friend_id AND f.user_id = :thisuser)",
-        {thisuser: id}
-      ])
+    friend_ids = []
+    friendships.each do |friendship|
+      friend_ids << friendship.user_id unless friendship.user_id == id
+      friend_ids << friendship.friend_id unless friendship.friend_id == id
+    end
+    User.where(id: friend_ids)
+  end
+
+  def add_friend(new_friend)
+    Friendship.create(user: self, friend: new_friend)
   end
 
   def self.from_omniauth(auth)
