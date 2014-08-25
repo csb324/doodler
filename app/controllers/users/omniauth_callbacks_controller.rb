@@ -5,7 +5,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if @user.persisted?
       if @user.sign_in_count == 0 || !@user.nickname
-        puts "THIS IS A NEW USER OMG"
         redirect_to first_sign_in_path(@user)
       else
         sign_in_and_redirect @user

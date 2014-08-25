@@ -1,3 +1,5 @@
+require 'pry'
+
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -8,6 +10,8 @@ class User < ActiveRecord::Base
   has_many :doodles, dependent: :destroy
   has_many :missions
   has_many :comments
+
+  attr_accessor :omniauth_token
 
   def friendships
     Friendship.find_by_sql(
@@ -23,11 +27,19 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-    where(auth.slice(:provider, :uid)).first_or_create do |user|
+    where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
       user.name = auth.info.name
+      user.omniauth_token = auth.credentials.token
+      user.save!
+      user.find_friends
     end
+  end
+
+  def find_friends
+    graph = Koala::Facebook::API.new(omniauth_token)
+    graph.get_connection("me", "friends")
   end
 
   def self.new_with_session(params, session)

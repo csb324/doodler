@@ -1,1 +1,1 @@
-DOING RIGHT NOW: looking at the timer
+DOING RIGHT NOW: getting friends from koala
