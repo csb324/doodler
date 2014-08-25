@@ -8,7 +8,6 @@
 
 Mission.delete_all
 Doodle.delete_all
-User.delete_all
 
 # this is from https://github.com/davefrassoni/Pictionary/blob/master/dictionary.txt
 # he made a pictionary app
@@ -17,7 +16,11 @@ dictionary = ["abba", "acdc", "ace", "acorn", "add", "adele", "africa", "afro", 
 
 
 @admin = User.create(email: "Admin@doodler.com", password: "password")
+@day = Time.now()
 
-10.times do
-  @mission = Mission.create(name: dictionary.sample, user: @admin)
+3.times do
+  4.times do
+    @mission = Mission.create(name: dictionary.sample, user: @admin, created_at: @day)
+  end
+  @day += 1.day
 end

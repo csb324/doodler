@@ -1,5 +1,5 @@
 class Mission < ActiveRecord::Base
-  has_many :doodles
+  has_many :doodles, as: :doodleable
   belongs_to :user
 
   def open?

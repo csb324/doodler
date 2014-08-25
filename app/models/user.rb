@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
          :omniauthable, omniauth_providers: [:facebook]
 
   has_many :doodles, dependent: :destroy
+  has_many :profile_pictures, class_name: "Doodle", as: :doodleable
   has_many :missions
   has_many :comments
 

@@ -13,11 +13,15 @@ class DoodlesController < ApplicationController
     @doodle = Doodle.new
     @doodle.image = convert_data_uri_to_upload(params[:doodle][:imagedata])
     @doodle.user = current_user
-    @mission = Mission.find(params[:doodle][:mission_id])
-    @doodle.mission = @mission
+
+    @doodle.doodleable = doodleable
 
     @doodle.save
-    respond_with @mission
+    if params[:doodleable_type] == "Mission"
+      respond_with doodleable
+    else
+      redirect_to doodleable
+    end
   end
 
 
@@ -25,6 +29,11 @@ class DoodlesController < ApplicationController
 
   # these methods are here so i can pass a base64 string into the json
   # and upload them to carrierwave as an image file
+
+  def doodleable
+    doodleable_id = params["#{params[:doodleable_type].underscore}_id"]
+    params[:doodleable_type].constantize.find(doodleable_id)
+  end
 
   def convert_data_uri_to_upload(image_string)
     image_data = split_base64(image_string)

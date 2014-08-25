@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140825145750) do
+ActiveRecord::Schema.define(version: 20140825184744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,13 +25,13 @@ ActiveRecord::Schema.define(version: 20140825145750) do
   end
 
   create_table "doodles", force: true do |t|
-    t.string  "name"
-    t.integer "mission_id"
     t.integer "user_id"
-    t.string  "image_path", default: "bunny.jpg"
     t.string  "image"
+    t.integer "doodleable_id"
+    t.string  "doodleable_type"
   end
 
+  add_index "doodles", ["doodleable_id", "doodleable_type"], name: "index_doodles_on_doodleable_id_and_doodleable_type", using: :btree
   add_index "doodles", ["user_id"], name: "index_doodles_on_user_id", using: :btree
 
   create_table "friendships", force: true do |t|
