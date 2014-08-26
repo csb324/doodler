@@ -7,8 +7,11 @@ FinishSignup =
 
     $('#finish-signup').click (event) =>
       @nickname = $('#yournickname').val()
+      @email = $('#email').val()
       if @nickname == ""
         @showError("Input a username")
+      else if @email == "" || @email == "example@example.com"
+        @showError("Input a valid email address")
       else
         @completeProfile()
 
@@ -20,6 +23,7 @@ FinishSignup =
       data:
         user:
           nickname: @nickname
+          email: @email
 
       success: ->
         window.location = '/'
