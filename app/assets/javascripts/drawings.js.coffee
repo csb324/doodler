@@ -34,7 +34,7 @@ CreateDoodles =
       $('.drawing-environment').empty()
 
   drawingEnvironment: ->
-
+    $('.drawing-environment').empty()
     $('.drawing-environment').append(HandlebarsTemplates.drawingcanvas())
     $('.drawing-environment-hide').hide()
 
