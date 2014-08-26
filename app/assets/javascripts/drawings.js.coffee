@@ -5,6 +5,7 @@ CreateDoodles =
   initialize: ->
     @doodleableType = $('.drawing-environment').data("doodleable-type")
     @doodleableId = $('.drawing-environment').data("doodleable-id")
+
     $('#begin-drawing').click (event) =>
       event.preventDefault()
       @initializeDrawing()
@@ -144,8 +145,7 @@ CreateDoodles =
   countSecond: =>
     timerbox = $('#timer')
     @seconds -= 1
-
-    # the most basic time-formatting ever bc we're only dealing with 0-60
+    # most basic time-formatting ever bc we're only dealing with 0-60
     if @seconds < 10
       displayseconds = "0:0" + @seconds
     else

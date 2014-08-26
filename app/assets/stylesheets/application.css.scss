@@ -78,3 +78,14 @@ button, .button {
     display: inline-block;
   }
 }
+
+svg {
+  rect {
+    fill: $yellow;
+  }
+
+  .axis text {
+    fill: $pink;
+  }
+
+}

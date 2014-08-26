@@ -14,8 +14,14 @@
     <% if user_signed_in? && @user == current_user %>
       <button id="begin-drawing">Draw a new profile picture</button>
     <% end %>
+  </div>
 
-    <div id="profile-statistics" class="drawing-environment-hide" data-doodleable-id=<%= @user.id %> data-doodleable-type="User">
+  <div class="columns small-12">
+    <div id="profile-statistics" class="drawing-environment-hide row" data-doodleable-id=<%= @user.id %> data-doodleable-type="User">
+      <div class="columns small-6" id="points-chart">
+        <svg id="userstats"></svg>
+        <button id="change-graph">toggle</button>
+      </div>
     </div>
   </div>
 </div>

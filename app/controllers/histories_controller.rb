@@ -6,7 +6,6 @@ class HistoriesController < ApplicationController
     {root: false}
   end
 
-
   def show
     @history = History.new(User.find(params[:user_id]))
     respond_with @history
