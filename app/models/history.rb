@@ -27,12 +27,22 @@ class History
     points
   end
 
-  def points
+  def doodle_points_so_far(day)
+    date_range = (@user.created_at.to_date .. day)
+    points = 0
+    date_range.each do |singleday|
+      points += doodle_points(singleday)
+    end
+    points
+  end
+
+  def data
     days = []
     @dates.each do |day|
       this_day = {}
       this_day[:day] = day
       this_day[:doodle_points] = doodle_points(day)
+      this_day[:doodle_points_so_far] = doodle_points_so_far(day)
       days << this_day
     end
     days
