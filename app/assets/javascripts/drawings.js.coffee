@@ -5,7 +5,6 @@ CreateDoodles =
   initialize: ->
     @doodleableType = $('.drawing-environment').data("doodleable-type")
     @doodleableId = $('.drawing-environment').data("doodleable-id")
-
     $('#begin-drawing').click (event) =>
       event.preventDefault()
       @initializeDrawing()
@@ -34,8 +33,7 @@ CreateDoodles =
       $('.drawing-environment').empty()
 
   drawingEnvironment: ->
-    $('.drawing-environment').empty()
-    $('.drawing-environment').append(HandlebarsTemplates.drawingcanvas())
+    $('.drawing-environment').empty().append(HandlebarsTemplates.drawingcanvas())
     $('.drawing-environment-hide').hide()
 
     myCanvas = $('#my-canvas')
@@ -156,6 +154,5 @@ CreateDoodles =
     timerbox.text(displayseconds)
     if @seconds == 0
       CreateDoodles.finishDrawing()
-
 
 
