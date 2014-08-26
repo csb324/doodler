@@ -10,18 +10,17 @@
     <h1><%= @user.nickname %></h1>
     <p><%= @user.points %> points</p>
     <p>Doodler since <%= @user.created_at.strftime("%B %e, %Y") %></p>
-    <div class="buttons">
+
+    <% if user_signed_in? && @user == current_user %>
       <button id="begin-drawing">Draw a new profile picture</button>
-    </div>
+    <% end %>
 
     <div id="profile-statistics" class="drawing-environment-hide" data-doodleable-id=<%= @user.id %> data-doodleable-type="User">
     </div>
   </div>
 </div>
 
-<div class="row">
-  <div class="drawing-environment-show column">
-    <div class="buttons" id="finish-doodle">
-    </div>
+<% if user_signed_in? && @user == current_user %>
+  <div class="drawing-environment" data-doodleable-id=<%= @user.id %> data-doodleable-type="User">
   </div>
-</div>
+<% end %>

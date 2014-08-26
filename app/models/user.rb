@@ -56,13 +56,11 @@ class User < ActiveRecord::Base
   def find_friends
     graph = Koala::Facebook::API.new(omniauth_token)
     facebook_friends = graph.get_connection("me", "friends")
-
     uids = facebook_friends.map{ |friend| friend["id"] }
     existing_friends_uids = friends.map(&:uid)
 
     new_friends_uids = uids - existing_friends_uids
 
-    binding.pry
     new_friends = User.where(uid: new_friends_uids)
     new_friends.each do |person|
       add_friend(person)

@@ -5,7 +5,7 @@
   </div>
 </div>
 
-<div id="doodles" class="drawing-environment-hide" data-doodleable-id=<%= @mission.id %> data-doodleable-type="Mission">
+<div id="doodles" class="drawing-environment-hide">
   <% if user_signed_in? && @mission.open? %>
     <button id="begin-drawing">doodle it!</button>
   <% elsif !@mission.open? %>
@@ -34,9 +34,7 @@
   <% end %>
 </div>
 
-<div class="drawing-environment row">
-  <div class="column">
-    <div class="buttons" id="finish-doodle">
-    </div>
-  </div>
+<% if user_signed_in? && @mission.open? %>
+<div class="drawing-environment" data-doodleable-id=<%= @mission.id %> data-doodleable-type="Mission">
 </div>
+<% end %>

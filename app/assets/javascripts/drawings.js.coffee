@@ -3,8 +3,8 @@ $(document).ready ->
 
 CreateDoodles =
   initialize: ->
-    @doodleableType = $('.drawing-environment-hide').data("doodleable-type")
-    @doodleableId = $('.drawing-environment-hide').data("doodleable-id")
+    @doodleableType = $('.drawing-environment').data("doodleable-type")
+    @doodleableId = $('.drawing-environment').data("doodleable-id")
 
     $('#begin-drawing').click (event) =>
       event.preventDefault()
@@ -19,40 +19,27 @@ CreateDoodles =
       clearInterval(@interval)
     @drawingEnvironment()
 
-  buildDrawingButtons: ->
-    showButton = $('<button>').attr("id", "show-this").text("show")
-    startOver = $('<button>').attr("id", "start-over").text("start over")
-    goBack = $('<button>').attr("id", "go-back").text("go back")
-    timer = $('<div>').attr("id", "timer").text("1:00")
-
-    $('.buttons').empty()
-    $('#finish-doodle')
-      .append(showButton)
-      .append(startOver)
-      .append(goBack)
-      .append(timer)
-
-    showButton.click (event) =>
+  drawingButtons: ->
+    $('#show-this').click (event) =>
       event.preventDefault()
       @finishDrawing()
 
-    startOver.click (event) =>
+    $('#start-over').click (event) =>
       event.preventDefault()
       @initializeDrawing()
 
-    goBack.click (event) =>
+    $('#go-back').click (event) =>
       event.preventDefault()
       $('.drawing-environment-hide').show()
-      $('.drawing-environment-show').hide()
+      $('.drawing-environment').empty()
 
   drawingEnvironment: ->
-    console.log("creating the drawing environment")
-    myCanvas = $('<canvas>').attr("id", "my-canvas")
-    $('.drawing-environment-hide').hide()
-    $('.drawing-environment').show().find('canvas').remove()
-    $('.drawing-environment').append(myCanvas)
 
-    @buildDrawingButtons()
+    $('.drawing-environment').append(HandlebarsTemplates.drawingcanvas())
+    $('.drawing-environment-hide').hide()
+
+    myCanvas = $('#my-canvas')
+    @drawingButtons()
     @context = myCanvas[0].getContext('2d')
 
     @startTimer()
@@ -113,25 +100,17 @@ CreateDoodles =
   finishDrawing: ->
     clearInterval(@interval)
     @redraw()
-    $('.buttons').empty()
+    $('.while-drawing').hide()
+    $('.done-drawing').show()
     $('#my-canvas')[0].style.webkitFilter = "blur(25px)"
-    @addConfirmButtons()
+    @confirmButtons()
 
-  addConfirmButtons: ->
-    buttonsContainer = $('<div>').addClass("buttons")
-    finishButton = $('<button>').attr("id", "confirm").text("submit!")
-    startOverButton = $('<button>').attr("id", "nevermind").text("start over")
-
-    buttonsContainer.append(finishButton).append(startOverButton)
-
-    buttonsContainer.css("position", "absolute").css("left", "200px").css("top", "200px")
-    $('.drawing-environment').append(buttonsContainer)
-
-    finishButton.click (event) =>
+  confirmButtons: ->
+    $('#confirm').click (event) =>
       event.preventDefault()
       @saveImage()
 
-    startOverButton.click (event) =>
+    $('#nevermind').click (event) =>
       event.preventDefault()
       @initializeDrawing()
 
