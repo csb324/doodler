@@ -4,12 +4,13 @@ $(document).ready ->
 
 UserGraph =
   initialize: ->
-    @values = @pointsPerDay
+    @values = @startedAtTheBottomNowWereHere
     @buildGraphBox()
     @getHistoryData()
 
     $("#stats-options button").click (event) =>
       $("#stats-options button").removeClass("current")
+      event.preventDefault()
       $(event.target).addClass("current")
       if $(event.target).is("#doodles-per-day")
         @values = @doodlesPerDay
@@ -32,6 +33,10 @@ UserGraph =
         @ajaxData = response.history
         console.log(@ajaxData)
         @buildGraph()
+        $('#doodles-per-day').click()
+
+  startedAtTheBottomNowWereHere: (d) ->
+    0
 
   pointsPerDay: (d) ->
     d.points_per_day
@@ -62,11 +67,12 @@ UserGraph =
   setWidths: ->
     @width = parseInt(@chartContainer.style("width"), 10) - @margin.left - @margin.right
     @xScale.rangeRoundBands([0, @width], .1)
+
     @xAxis = d3.svg.axis().scale(@xScale)
       .ticks(d3.time.days, 1)
       .tickFormat(d3.time.format("%b %e"))
 
-    @chart = d3.select("svg")
+    @chart = d3.select("#userstats")
 
     @chart.attr("width", @width + @margin.left + @margin.right)
     @chart.selectAll(".day")
@@ -75,6 +81,10 @@ UserGraph =
       )
       .attr("width", @xScale.rangeBand())
     @chart.select(".x.axis").call(@xAxis)
+
+    @chart.selectAll(".score")
+      .attr("x", (d) =>
+        @xScale(@dateParser(d)) + (@xScale.rangeBand() / 2))
 
   buildGraph: ->
     @data = @ajaxData.slice().sort(@sortByDate)
@@ -152,6 +162,7 @@ UserGraph =
   redrawGraph: ->
     @maxValue = d3.max(@data, (d) =>
       @values(d))
+
     @yScale = d3.scale.linear()
       .range([@height, 0])
       .domain([0, @maxValue])
