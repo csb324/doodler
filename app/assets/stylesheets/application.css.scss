@@ -93,6 +93,20 @@ button, .button {
     color: darken($teal, 15%);
     border-color: darken($teal, 15%);
   }
+
+  .doodle-info {
+    min-width: 100%;
+    min-height: 100%;
+    background: $navy-blue;
+    position: absolute;
+    top: 0;
+    padding: 15px;
+    h4 {
+      color: white;
+      line-height: 100%;
+    }
+  }
+
 }
 
 .headline {

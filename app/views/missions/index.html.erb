@@ -38,6 +38,11 @@
           <div class="small-6 columns">
             <%= link_to doodle do %>
               <%= image_tag doodle.image.url, class: "recent-image" %>
+              <div class="doodle-info" style="display: none;">
+                <h4>
+                <%= doodle.doodleable_type == "Mission" ? doodle.doodleable.name : "profile picture" %>
+                </h4>
+              </div>
             <% end %>
           </div>
         <% end %>
