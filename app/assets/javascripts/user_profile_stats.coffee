@@ -7,6 +7,10 @@ UserGraph =
     @buildGraphBox()
     @getHistoryData()
 
+    $("#change-graph").click =>
+      @values = @pointsSoFar
+      @buildGraph()
+
   getHistoryData: ->
     @userId = $('#profile-statistics').data("doodleable-id")
     $.ajax
@@ -88,7 +92,10 @@ UserGraph =
     day = svg.selectAll(".day")
       .data(@data)
       .enter()
-      .append("rect")
+      .append("g")
+
+
+    rectangle = day.append("rect")
       .attr("class", "day")
       .attr("x", (d) =>
         @xScale(@dateParser(d))
@@ -100,6 +107,17 @@ UserGraph =
       .attr("height", (d) =>
         @height - @yScale(@values(d)) + 1
       )
+
+    value = day.append("text")
+      .text((d) =>
+        @values(d)
+      ).attr("class", "score")
+      .attr("x", (d) =>
+        @xScale(@dateParser(d)) + (@xScale.rangeBand() / 2))
+      .attr("y", (d) =>
+        @yScale(@values(d)) - 5
+      )
+
 
     svg.append("g")
       .attr("class", "x axis")
