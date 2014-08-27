@@ -1,22 +1,26 @@
 <div class="row">
 
-  <div class="open-missions">
-    <h2 class="column">open missions</h2>
+  <div class="missions">
+    <div class="column">
+      <h4 class="sketch">open missions:</h4>
+    </div>
     <% @open_missions.each do |mission| %>
       <div class="medium-3 columns">
         <div class="open-mission single-mission">
-          <h2 class="sketch bold"><%= link_to mission.name, mission %></h2>
+          <h3 class="sketch bold"><%= link_to mission.name, mission %></h3>
         </div>
       </div>
     <% end %>
   </div>
 
-  <div class="open-missions">
-    <h2 class="column">vote on a winner!</h2>
+  <div class="missions">
+    <div class="column">
+      <h4 class="sketch">vote on a winner:</h4>
+    </div>
     <% @votable_missions.each do |mission| %>
       <div class="medium-3 columns">
         <div class="votable-mission single-mission">
-          <h2 class="sketch bold"><%= link_to mission.name, mission %></h2>
+          <h3 class="sketch bold"><%= link_to mission.name, mission %></h3>
         </div>
       </div>
     <% end %>
@@ -24,17 +28,34 @@
 
 </div> <!-- end row -->
 
-<div class="row">
+<div class="row recent">
+
   <% if user_signed_in? %>
-    <div class="medium-4 columns">
-      <h4>your recent doodles</h4>
-      <ul>
-        <% current_user.doodles.each do |doodle| %>
-          <% if doodle.doodleable_type == "Mission" %>
-            <li><%= link_to doodle.doodleable.name, doodle %></li>
-          <% end %>
+    <div class="medium-6 columns">
+      <div class="your-recent">
+        <h4 class="sketch headline">your recent doodles</h4>
+        <% current_user.recent_doodles.each do |doodle| %>
+          <div class="small-6 columns">
+            <%= link_to doodle do %>
+              <%= image_tag doodle.image.url, class: "recent-image" %>
+            <% end %>
+          </div>
         <% end %>
-      </ul>
+      </div>
+    </div>
+
+    <div class="medium-6 columns">
+      <div class="friends-recent">
+        <h4 class="sketch headline">your friends' doodles</h4>
+        <% current_user.friends_recent_doodles.each do |doodle| %>
+          <div class="small-6 columns">
+            <%= link_to doodle do %>
+              <%= image_tag doodle.image.url, class: "recent-image" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
   <% end %>
+
 </div>
