@@ -8,8 +8,7 @@ UserGraph =
     @getHistoryData()
 
     $("#change-graph").click =>
-      @values = @pointsSoFar
-      @buildGraph()
+      @toggleChange()
 
   getHistoryData: ->
     @userId = $('#profile-statistics').data("doodleable-id")
@@ -67,6 +66,9 @@ UserGraph =
 
   buildGraph: ->
     @data = @ajaxData.slice().sort(@sortByDate)
+    @maxValue = d3.max(@data, (d) =>
+      @values(d))
+
     @xScale = d3.scale.ordinal()
       .domain(@data.map((d) =>
         @dateParser(d)
@@ -75,9 +77,7 @@ UserGraph =
 
     @yScale = d3.scale.linear()
       .range([@height, 0])
-      .domain([0, d3.max(@data, (d) =>
-        @values(d)
-      )])
+      .domain([0, @maxValue])
 
     @xAxis = d3.svg.axis()
       .scale(@xScale)
@@ -94,9 +94,10 @@ UserGraph =
       .enter()
       .append("g")
 
-
-    rectangle = day.append("rect")
+    @rectangle = day.append("rect")
       .attr("class", "day")
+
+    @rectangle
       .attr("x", (d) =>
         @xScale(@dateParser(d))
       )
@@ -108,21 +109,74 @@ UserGraph =
         @height - @yScale(@values(d)) + 1
       )
 
-    value = day.append("text")
+    @valueLabel = day.append("text")
+      .attr("class", "score")
+      .attr("text-anchor", "middle")
+
+    @valueLabel
       .text((d) =>
         @values(d)
       ).attr("class", "score")
       .attr("x", (d) =>
         @xScale(@dateParser(d)) + (@xScale.rangeBand() / 2))
       .attr("y", (d) =>
-        @yScale(@values(d)) - 5
+        if @values(d) == @maxValue
+          @yScale(@values(d)) + 20
+        else
+          @yScale(@values(d)) - 5
       )
-
+      .style("fill", (d) =>
+        if @values(d) == @maxValue
+          "#fff"
+        else
+          "#000"
+        )
 
     svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0, #{@height})")
       .call(@xAxis)
+
+  toggleChange: ->
+    if @values == @pointsPerDay
+      @values = @pointsSoFar
+    else
+      @values = @pointsPerDay
+
+    @redrawGraph()
+
+  redrawGraph: ->
+    @maxValue = d3.max(@data, (d) =>
+      @values(d))
+    @yScale = d3.scale.linear()
+      .range([@height, 0])
+      .domain([0, @maxValue])
+
+    @rectangle.transition()
+      .attr("y", (d) =>
+        @yScale(@values(d)) - 1
+      )
+      .attr("height", (d) =>
+        @height - @yScale(@values(d)) + 1
+      )
+
+    @valueLabel.text((d) =>
+      @values(d))
+
+    @valueLabel.transition()
+      .attr("y", (d) =>
+        if @values(d) == @maxValue
+          @yScale(@values(d)) + 20
+        else
+          @yScale(@values(d)) - 5
+      )
+      .style("fill", (d) =>
+        if @values(d) == @maxValue
+          "#fff"
+        else
+          "#000"
+        )
+
 
   # because it's a bar graph, these are treated as ordinals
   # data should arrive in order anyways, but i'm double checking
