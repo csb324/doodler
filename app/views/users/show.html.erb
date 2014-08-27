@@ -17,12 +17,18 @@
   </div>
 
   <div class="columns small-12">
+
     <div id="profile-statistics" class="drawing-environment-hide row" data-doodleable-id=<%= @user.id %> data-doodleable-type="User">
       <div class="columns small-6" id="points-chart">
         <svg id="userstats"></svg>
-        <button id="change-graph">toggle</button>
+        <div id="stats-options">
+          <button id="doodles-per-day" class="current">doodles per day</button>
+          <button id="points-per-day">points per day</button>
+          <button id="points-over-time">points over time</button>
+        </div>
       </div>
     </div>
+
   </div>
 </div>
 

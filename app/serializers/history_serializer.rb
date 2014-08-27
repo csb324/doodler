@@ -1,3 +1,3 @@
 class HistorySerializer < ActiveModel::Serializer
-  attributes :data
+  attributes :history
 end

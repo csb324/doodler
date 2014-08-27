@@ -36,13 +36,20 @@ class History
     points
   end
 
-  def data
+  def doodle_count(day)
+    @user.doodles.where(
+      "created_at BETWEEN :day_start AND :day_end",
+      { day_start: day, day_end: day + 1.day }).size
+  end
+
+  def history
     days = []
     @dates.each do |day|
       this_day = {}
       this_day[:day] = day
-      this_day[:doodle_points] = doodle_points(day)
-      this_day[:doodle_points_so_far] = doodle_points_so_far(day)
+      this_day[:points_per_day] = doodle_points(day)
+      this_day[:points_so_far] = doodle_points_so_far(day)
+      this_day[:doodles_per_day] = doodle_count(day)
       days << this_day
     end
     days

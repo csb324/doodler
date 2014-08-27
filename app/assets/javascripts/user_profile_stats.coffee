@@ -1,5 +1,5 @@
-$('#profile-statistics').ready ->
-  if this.length > 0
+$(document).ready ->
+  if $('#profile-statistics').length > 0
     UserGraph.initialize()
 
 UserGraph =
@@ -8,8 +8,16 @@ UserGraph =
     @buildGraphBox()
     @getHistoryData()
 
-    $("#change-graph").click =>
-      @toggleChange()
+    $("#stats-options button").click (event) =>
+      $("#stats-options button").removeClass("current")
+      $(event.target).addClass("current")
+      if $(event.target).is("#doodles-per-day")
+        @values = @doodlesPerDay
+      else if $(event.target).is("#points-per-day")
+        @values = @pointsPerDay
+      else if $(event.target).is("#points-over-time")
+        @values = @pointsSoFar
+      @redrawGraph()
 
   getHistoryData: ->
     @userId = $('#profile-statistics').data("doodleable-id")
@@ -21,15 +29,18 @@ UserGraph =
       error: (omg) ->
         console.log(omg)
       success: (response) =>
-        @ajaxData = response.data
+        @ajaxData = response.history
         console.log(@ajaxData)
         @buildGraph()
 
   pointsPerDay: (d) ->
-    d.doodle_points
+    d.points_per_day
 
   pointsSoFar: (d) ->
-    d.doodle_points_so_far
+    d.points_so_far
+
+  doodlesPerDay: (d) ->
+    d.doodles_per_day
 
   buildGraphBox: ->
     @chartContainer = d3.select("#points-chart")
@@ -137,14 +148,6 @@ UserGraph =
       .attr("class", "x axis")
       .attr("transform", "translate(0, #{@height})")
       .call(@xAxis)
-
-  toggleChange: ->
-    if @values == @pointsPerDay
-      @values = @pointsSoFar
-    else
-      @values = @pointsPerDay
-
-    @redrawGraph()
 
   redrawGraph: ->
     @maxValue = d3.max(@data, (d) =>

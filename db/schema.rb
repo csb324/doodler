@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140825184744) do
+ActiveRecord::Schema.define(version: 20140827172541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,10 +25,12 @@ ActiveRecord::Schema.define(version: 20140825184744) do
   end
 
   create_table "doodles", force: true do |t|
-    t.integer "user_id"
-    t.string  "image"
-    t.integer "doodleable_id"
-    t.string  "doodleable_type"
+    t.integer  "user_id"
+    t.string   "image"
+    t.integer  "doodleable_id"
+    t.string   "doodleable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "doodles", ["doodleable_id", "doodleable_type"], name: "index_doodles_on_doodleable_id_and_doodleable_type", using: :btree
