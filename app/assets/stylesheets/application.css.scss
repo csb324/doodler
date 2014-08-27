@@ -32,6 +32,13 @@ canvas {
   background: white;
 }
 
+.sketch {
+  font-family: 'Cabin Sketch', sans-serif;
+  &.bold {
+    font-weight: 700;
+  }
+}
+
 button, .button {
   padding: 10px;
   margin-top: 5px;
@@ -42,6 +49,31 @@ button, .button {
     background: $dark-gold;
   }
 }
+
+//////////////////// NAV STUFF ///////////////////////
+
+.top-bar .row {
+  max-width: 62.5rem;
+}
+
+//////////////////// INDEX PAGE STUFF //////////////////////
+
+.single-mission {
+  text-align: center;
+  border-radius: 5px;
+  a {
+    color: white;
+  }
+  &.open-mission {
+    background: rgba($navy-blue, 0.7);
+  }
+  &.votable-mission {
+    background: rgba($red, 0.7);
+  }
+}
+
+
+//////////////////// USER PROFILE STUFF ////////////////////
 
 button.current {
   background: $teal;

@@ -1,20 +1,28 @@
 <div class="row">
-  <div class="columns">
-    <% if user_signed_in? %>
-      <h1>welcome, <%= current_user.nickname %></h1>
+
+  <div class="open-missions">
+    <h2 class="column">open missions</h2>
+    <% @open_missions.each do |mission| %>
+      <div class="medium-3 columns">
+        <div class="open-mission single-mission">
+          <h2 class="sketch bold"><%= link_to mission.name, mission %></h2>
+        </div>
+      </div>
     <% end %>
-    <h2>open missions</h2>
   </div>
 
-  <% @missions.each do |mission| %>
-    <div class="medium-3 columns">
-      <% if mission.doodles.present? %>
-        <%= image_tag mission.doodles.first.image.url, alt: "top", class:"sample-doodle" %>
-      <% end %>
-      <h4><%= link_to mission.name, mission %></h4>
-    </div>
-  <% end %>
-</div>
+  <div class="open-missions">
+    <h2 class="column">vote on a winner!</h2>
+    <% @votable_missions.each do |mission| %>
+      <div class="medium-3 columns">
+        <div class="votable-mission single-mission">
+          <h2 class="sketch bold"><%= link_to mission.name, mission %></h2>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+</div> <!-- end row -->
 
 <div class="row">
   <% if user_signed_in? %>

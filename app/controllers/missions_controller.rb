@@ -8,8 +8,11 @@ class MissionsController < ApplicationController
 
   def index
     # these are the missions created in the last 24 hours! others are closed.
-    @missions = Mission.where("created_at <= :now AND created_at >= :yesterday",
-      {now: Time.now(), yesterday: Time.now() - 1.day })
+    @open_missions = Mission.where("created_at BETWEEN :yesterday AND :now",
+      { now: Time.now(), yesterday: Time.now() - 1.day })
+
+    @votable_missions = Mission.where("created_at BETWEEN :day_before AND :yesterday",
+      { yesterday: Time.now() - 1.day, day_before: Time.now() - 2.days })
   end
 
   def show

@@ -46,9 +46,10 @@ $include-html-global-classes: $include-html-classes;
 // $body-bg: #fff;
 /////////CLARA DID THIS//////////////////$body-font-color: #fff;
 
-@import url(http://fonts.googleapis.com/css?family=Noto+Sans:400,700|Loved+by+the+King);
 
-$body-font-family: "Noto Sans", Helvetica, Arial, sans-serif;
+@import url(http://fonts.googleapis.com/css?family=Cabin+Sketch:400,700|Open+Sans);
+
+$body-font-family: "Open Sans", Helvetica, Arial, sans-serif;
 $font-weight-normal:normal;
 $body-font-weight: $font-weight-normal;
 // $body-font-style: normal;
