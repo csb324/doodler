@@ -5,10 +5,10 @@ RecentDoodles =
   initialize: ->
     console.log("HEY")
 
-    $('.recent .small-6').mouseenter (event) ->
+    $('.recent .single-doodle').mouseenter (event) ->
       info = $(@).find(".doodle-info")
       info.show()
 
-    $('.recent .small-6').mouseleave (event) ->
+    $('.recent .single-doodle').mouseleave (event) ->
       info = $(@).find(".doodle-info")
       info.hide()
