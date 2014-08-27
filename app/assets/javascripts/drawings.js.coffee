@@ -13,9 +13,11 @@ CreateDoodles =
 
   initializeDrawing: ->
     @paint = false;
+    @currentColor = "#000"
     @clickX = []
     @clickY = []
     @clickDrag = []
+    @colors = []
     if @interval
       clearInterval(@interval)
     @drawingEnvironment()
@@ -33,6 +35,15 @@ CreateDoodles =
       event.preventDefault()
       $('.drawing-environment-hide').show()
       $('.drawing-environment').empty()
+
+    $('#color-picker a').click (event) =>
+      event.preventDefault()
+
+      $('#color-picker a').removeClass("current-color")
+      $(event.target).addClass("current-color")
+
+      @currentColor = $(event.target).css("color")
+
 
   drawingEnvironment: ->
     $('.drawing-environment').empty().append(HandlebarsTemplates.drawingcanvas())
@@ -53,13 +64,13 @@ CreateDoodles =
       mouseY = event.pageY - $(this).offset().top
       CreateDoodles.paint = true
 
-      CreateDoodles.addClick(mouseX, mouseY)
+      CreateDoodles.addClick(mouseX, mouseY, CreateDoodles.currentColor)
 
     myCanvas.mousemove (event) ->
       if CreateDoodles.paint
         mouseX = event.pageX - $(this).offset().left
         mouseY = event.pageY - $(this).offset().top
-        CreateDoodles.addClick(mouseX, mouseY, true)
+        CreateDoodles.addClick(mouseX, mouseY, CreateDoodles.currentColor, true)
 
     myCanvas.mouseup (event) =>
       @paint = false
@@ -68,10 +79,11 @@ CreateDoodles =
       @paint = false
 
 
-  addClick: (x, y, dragging) ->
+  addClick: (x, y, color, dragging) ->
     console.log("adding a click")
     @clickY.push(y)
     @clickX.push(x)
+    @colors.push(color)
     @clickDrag.push(dragging)
 
   redraw: ->
@@ -80,7 +92,6 @@ CreateDoodles =
     @context.fillStyle = '#fff'
     @context.fill()
 
-    @context.strokeStyle = "#000"
     @context.lineJoin = "round"
     @context.lineWidth = 5
 
@@ -94,7 +105,7 @@ CreateDoodles =
 
       @context.lineTo(value, @clickY[i])
       @context.closePath()
-
+      @context.strokeStyle = @colors[i]
       @context.stroke()
 
   finishDrawing: ->
