@@ -1,5 +1,6 @@
 $(document).ready ->
-  CreateDoodles.initialize()
+  if $('.drawing-environment').length > 0
+    CreateDoodles.initialize()
 
 CreateDoodles =
   initialize: ->

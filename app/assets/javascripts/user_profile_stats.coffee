@@ -1,5 +1,6 @@
-$(document).ready ->
-  UserGraph.initialize()
+$('#profile-statistics').ready ->
+  if this.length > 0
+    UserGraph.initialize()
 
 UserGraph =
   initialize: ->

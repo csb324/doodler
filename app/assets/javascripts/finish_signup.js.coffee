@@ -1,5 +1,6 @@
 $(document).ready ->
-  FinishSignup.initialize()
+  if $('.finish-page').length > 0
+    FinishSignup.initialize()
 
 FinishSignup =
   initialize: ->
