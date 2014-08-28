@@ -48,7 +48,6 @@ gem 'carrierwave'
 # gem 'fog'
 # replacing fog with carrierwave-aws because of that timeout socket issue
 gem 'carrierwave-aws'
-
 gem 'rmagick', require: false
 gem 'aws-sdk'
 gem 'dotenv-rails'
@@ -60,7 +59,6 @@ gem 'handlebars_assets'
 gem 'active_model_serializers'
 
 #hopefully this will replace gem 'random-word'
-gem 'wordnik'
 
 group :development, :test do
   gem 'jasmine-rails'
@@ -77,4 +75,8 @@ group :test do
   gem 'launchy'
   gem 'poltergeist'
   gem 'shoulda-matchers'
+end
+
+group :production do
+  gem 'rails_12factor'
 end

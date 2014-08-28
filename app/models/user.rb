@@ -7,7 +7,6 @@ class User < ActiveRecord::Base
 
   has_many :doodles, dependent: :destroy
   has_many :profile_pictures, class_name: "Doodle", as: :doodleable
-  has_many :missions
   has_many :comments
 
   attr_accessor :omniauth_token
