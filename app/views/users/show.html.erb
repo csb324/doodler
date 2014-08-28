@@ -20,17 +20,23 @@
 
     <div id="profile-statistics" class="drawing-environment-hide row" data-doodleable-id=<%= @user.id %> data-doodleable-type="User">
 
-      <div class="columns small-6" id="points-chart">
-
-        <div id="stats-options">
-          <button id="doodles-per-day">doodles per day</button>
-          <button id="points-per-day">points per day</button>
-          <button id="points-over-time">points over time</button>
+      <div class="columns medium-6" id="points-chart">
+        <h4 class="sketch headline">your history</h4>
+        <div id="stats-options" class="row">
+          <div class="columns small-4">
+            <button class="expand" id="doodles-per-day">doodles per day</button>
+          </div>
+          <div class="columns small-4">
+            <button class="expand" id="points-per-day">points per day</button>
+          </div>
+          <div class="columns small-4">
+            <button class="expand" id="points-over-time">points over time</button>
+          </div>
         </div>
         <svg id="userstats"></svg>
       </div>
 
-      <div class="columns small-6" id="leaderboard">
+      <div class="columns medium-6" id="leaderboard">
         <svg id="highscores"></svg>
       </div>
 

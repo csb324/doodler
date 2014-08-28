@@ -41,6 +41,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def profile_picture
+    profile_pictures.order(created_at: :desc).first
+  end
+
   def recent_doodles
     doodles.order(created_at: :desc).limit(6)
   end

@@ -18,7 +18,6 @@
 
 $teal: #00E6B0;
 $gold: #F6D009;
-$dark-gold: #DB9A0F;
 $red: #E60036;
 $blue: #0023B9;
 $navy-blue: #1C2966;
@@ -44,9 +43,9 @@ button, .button {
   margin-top: 5px;
   margin-left: 2px;
   margin-right: 2px;
-  background: $gold;
-  &:hover {
-    background: $dark-gold;
+  background: $blue;
+  &:hover, &:active {
+    background: lighten($blue, 15%);
   }
 }
 
@@ -146,6 +145,11 @@ button, .button {
 
 button.current {
   background: $teal;
+}
+
+#stats-options .columns {
+  padding-left: 0.7rem;
+  padding-right: 0.7rem;
 }
 
 svg {
