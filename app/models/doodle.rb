@@ -3,7 +3,7 @@ class Doodle < ActiveRecord::Base
   belongs_to :doodleable, polymorphic: true
   belongs_to :user
 
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   mount_uploader :image, DoodlefileUploader
 

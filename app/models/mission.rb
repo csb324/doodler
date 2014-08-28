@@ -1,6 +1,5 @@
 class Mission < ActiveRecord::Base
-  has_many :doodles, as: :doodleable
-  belongs_to :user
+  has_many :doodles, as: :doodleable, dependent: :destroy
   belongs_to :winner, class_name: "Doodle"
 
   def open?

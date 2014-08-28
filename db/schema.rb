@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140827181944) do
+ActiveRecord::Schema.define(version: 20140828201359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,9 @@ ActiveRecord::Schema.define(version: 20140827181944) do
     t.string   "body"
   end
 
+  add_index "comments", ["doodle_id"], name: "index_comments_on_doodle_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
   create_table "doodles", force: true do |t|
     t.integer  "user_id"
     t.string   "image"
@@ -33,6 +36,7 @@ ActiveRecord::Schema.define(version: 20140827181944) do
     t.datetime "updated_at"
   end
 
+  add_index "doodles", ["created_at"], name: "index_doodles_on_created_at", using: :btree
   add_index "doodles", ["doodleable_id", "doodleable_type"], name: "index_doodles_on_doodleable_id_and_doodleable_type", using: :btree
   add_index "doodles", ["user_id"], name: "index_doodles_on_user_id", using: :btree
 
@@ -41,16 +45,17 @@ ActiveRecord::Schema.define(version: 20140827181944) do
     t.integer "friend_id"
   end
 
+  add_index "friendships", ["friend_id"], name: "index_friendships_on_friend_id", using: :btree
+  add_index "friendships", ["user_id"], name: "index_friendships_on_user_id", using: :btree
+
   create_table "missions", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
-    t.string   "description"
     t.integer  "winner_id"
   end
 
-  add_index "missions", ["user_id"], name: "index_missions_on_user_id", using: :btree
+  add_index "missions", ["created_at"], name: "index_missions_on_created_at", using: :btree
   add_index "missions", ["winner_id"], name: "index_missions_on_winner_id", using: :btree
 
   create_table "users", force: true do |t|
