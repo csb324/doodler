@@ -11,7 +11,11 @@ class Highscore
     set_of_users.each do |user|
       topscore = {}
       topscore[:user] = user
-      topscore[:profile_picture] = user.profile_picture
+      if user.profile_picture_url == "default.jpg"
+        topscore[:profile_picture_url] = "/assets/default.jpg"
+      else
+        topscore[:profile_picture_url] = user.profile_picture_url
+      end
       topscore[:points] = user.points
       high_scores << topscore
     end

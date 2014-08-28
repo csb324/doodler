@@ -48,7 +48,7 @@ UserGraph =
     d.doodles_per_day
 
   buildGraphBox: ->
-    @chartContainer = d3.select("#points-chart")
+    @chartContainer = d3.selectAll("#points-chart")
     @margin = {
       top: 20,
       bottom: 20,
@@ -65,6 +65,7 @@ UserGraph =
 
   # I just really want it to be responsive ok
   setWidths: ->
+    console.log("RESIZING THE USER HISTORY")
     @width = parseInt(@chartContainer.style("width"), 10) - @margin.left - @margin.right
     @xScale.rangeRoundBands([0, @width], .1)
 

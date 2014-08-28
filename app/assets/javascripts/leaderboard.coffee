@@ -7,7 +7,6 @@ Leaderboard = {
     @userId = $('#leaderboard').data("userid")
     @getHighScores()
     @userSet = "global_leaderboard"
-    # @userSet = "friends_leaderboard"
 
     $('#global').click =>
       @userSet = "global_leaderboard"
@@ -49,8 +48,15 @@ Leaderboard = {
       @setWidths())
 
   setWidths: ->
+    console.log("RESIZING THE HIGH SCORES")
     # find everything width-related and reset its value
-    true
+    @width = parseInt(@chartContainer.style("width"), 10) - @margin.left - @margin.right
+
+    @svg.attr("width", @width + @margin.left + @margin.right)
+    @xScale.range([@barHeight, @width])
+
+    @svg.selectAll(".user rect").attr("width", (d) =>
+      @xScale(d.points) + 1)
 
   createGraph: ->
     @buildGraphBox()
@@ -63,6 +69,7 @@ Leaderboard = {
 
 
   redrawGraph: ->
+    oldDatalength = if @data then @data.length else 0
     @data = @ajaxData[@userSet].slice().sort(@sortByPointsDescending)
 
     @maxValue = d3.max(@data, (d) =>
@@ -70,7 +77,7 @@ Leaderboard = {
 
     @xScale = d3.scale.linear()
       .domain([0, @maxValue])
-      .range([0, @width])
+      .range([@barHeight, @width])
 
     @yScale = d3.scale.ordinal()
       .domain(d3.range(@data.length))
@@ -87,38 +94,41 @@ Leaderboard = {
     userEnter = user.enter()
       .append("g")
       .attr("class", "user")
+      .attr("transform", "translate(0, #{@barHeight * oldDatalength})")
 
     userEnter.append("rect")
       .style("fill", "#00e6b0")
       .style("opacity", "0.4")
       .attr("height", @yScale.rangeBand() - @spacing)
+      .attr("x", @barHeight)
+
+    userEnter.append("image")
+      .attr("xlink:href", (d) ->
+        d.profile_picture_url)
+      .attr("height", @yScale.rangeBand() - @spacing)
+      .attr("width", @yScale.rangeBand() - @spacing)
+      # nice that the profpics are always square huh?
 
     user.selectAll('rect')
       .transition()
       .attr("width", (d) =>
-        console.log("i got here. #{d.points}")
-        @xScale(d.points))
+        @xScale(d.points) + 1)
 
     user.transition().attr("transform", (d, i) =>
       "translate(0, #{@yScale(i)})")
 
     userEnter.append("text")
       .attr("class", "person")
-      .attr("x", 5)
+      .attr("x", 50)
       .attr("y", @barHeight / 2)
       .style("fill","#000")
+      .attr("dominant-baseline", "middle")
 
     user.selectAll('text')
       .text((d) =>
         d.user.nickname)
 
     user.exit().remove()
-
-
-
-
-
-
 
 
   # freaking javascript with its need for custom sort functions
@@ -129,6 +139,5 @@ Leaderboard = {
       -1
     else
       0
-
 
 }
