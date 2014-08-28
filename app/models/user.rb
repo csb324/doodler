@@ -49,6 +49,10 @@ class User < ActiveRecord::Base
     doodles.order(created_at: :desc).limit(6)
   end
 
+  def top_doodles
+    doodles.sort_by { |doodle| doodle.points }.reverse.take(6)
+  end
+
   def friends_recent_doodles
     friend_ids = friends.map(&:id)
     Doodle.where(user_id: friend_ids).order(created_at: :desc).limit(6)

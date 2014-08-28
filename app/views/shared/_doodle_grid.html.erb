@@ -1,0 +1,17 @@
+<% doodles.each do |doodle| %>
+  <div class="small-4 columns single-doodle">
+    <%= link_to doodle do %>
+      <%= image_tag doodle.image.url, class: "recent-image" %>
+      <div class="doodle-info" style="display: none;">
+        <% if doodle.doodleable_type == "Mission" %>
+          <h4><%= doodle.doodleable.name %></h4>
+          <p><%= doodle.points %> points</p>
+        <% else %>
+          <h4>PROFILE PICTURE</h4>
+        <% end %>
+        <p><%= doodle.comments.size %> comments</p>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+

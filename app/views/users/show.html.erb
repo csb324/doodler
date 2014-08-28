@@ -2,7 +2,7 @@
 
   <% if @user.profile_pictures.present? %>
     <div class="columns medium-3">
-      <%= image_tag @user.profile_pictures.first.image.url %>
+      <%= image_tag @user.profile_picture.image.url %>
     </div>
   <% end %>
 
@@ -36,9 +36,16 @@
         <svg id="userstats"></svg>
       </div>
 
-      <div class="columns medium-6" id="leaderboard">
-        <svg id="highscores"></svg>
-      </div>
+      <% if @user == current_user %>
+        <div class="columns medium-6" id="leaderboard">
+          <svg id="highscores"></svg>
+        </div>
+      <% else %>
+        <div class="columns medium-6 doodle-grid" id="top-doodles">
+          <h4 class="sketch headline"><%= @user.nickname %>'s top doodles</h4>
+          <%= render "shared/doodle_grid", doodles: @user.top_doodles %>
+        </div>
+      <% end %>
 
     </div>
   </div>

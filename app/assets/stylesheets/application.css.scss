@@ -100,15 +100,18 @@ button, .button {
 }
 
 .recent {
+  h4 {
+    color: darken($teal, 15%);
+    border-color: darken($teal, 15%);
+  }
+}
+
+.doodle-grid {
   .single-doodle {
     padding: 1px;
   }
   .recent-image {
     width: 100%;
-  }
-  h4 {
-    color: darken($teal, 15%);
-    border-color: darken($teal, 15%);
   }
 
   .doodle-info {
@@ -138,7 +141,6 @@ button, .button {
   border-bottom: 1px solid black;
   text-align: center;
 }
-
 
 
 //////////////////// USER PROFILE STUFF ////////////////////

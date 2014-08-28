@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show] do
     resource :history, only: [:show]
+    resource :highscore, only: [:show]
   end
 
   # Example of regular route:
