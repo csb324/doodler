@@ -3,16 +3,17 @@ $(document).ready ->
 
 CommentAndVote =
   initialize: ->
-    $(document).on "click", ".vote", (event) ->
+    $(".vote").on "click", (event) =>
       event.preventDefault()
-      value = $(@).data("votedirection")
+      value = $(event.target).data("votedirection") || $(event.target).parent().data("votedirection")
 
-      if $(@).hasClass("on-doodle")
-        CommentAndVote.doodleId = $(@).parents(".single-doodle").data("doodleid")
-        CommentAndVote.postDoodleVote(value)
+      if $(event.target).hasClass("on-doodle") || $(event.target).parent().hasClass("on-doodle")
+        @doodleId = $(event.target).parents(".single-doodle").data("doodleid")
+        @postDoodleVote(value)
+
       else if $(@).hasClass("on-comment")
-        CommentAndVote.commentId = $(@).parents(".comment").data("commentid")
-        CommentAndVote.postCommentVote(value)
+        @commentId = $(event.target).parents(".comment").data("commentid")
+        @postCommentVote(value)
 
     $('#comment-button').click (event) =>
       event.preventDefault()

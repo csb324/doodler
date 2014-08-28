@@ -151,7 +151,7 @@ CreateDoodles =
     # for some reason this line is also necessary or the timer goes double speed
     @interval = undefined
 
-    window.seconds = 20
+    window.seconds = 60
     ## DELETE THIS AFTER YOU FINISH STYLING CLARA
     @interval = setInterval(@countSecond, 1000)
 

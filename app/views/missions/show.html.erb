@@ -12,28 +12,41 @@
     <% end %>
     </span>
   </div>
+</div>
 
-
+<div class="row">
   <div id="doodles" class="drawing-environment-hide medium-9 medium-centered small-12 columns">
     <% if @doodles.length == 0 %>
       <h5 id="notice">No doodles yet... be the first!</h5>
     <% end %>
+
+
     <% @doodles.each do |doodle| %>
-      <div class="single-doodle row" data-doodleId=<%= doodle.id %>>
-        <div class="medium-1 column">
-          <a class="vote on-doodle" href="#" data-votedirection="1"><i class="fa-caret-up fa"></i></a>
-          </br>
-          <a class="vote on-doodle" href="#" data-votedirection="-1"><i class="fa-caret-down fa"></i></a>
-        </p>
+      <div class="single-doodle" data-doodleId=<%= doodle.id %>>
+        <div class="image-container">
+          <%= image_tag doodle.image.url %>
         </div>
 
-        <div class="medium-11 columns">
-          <%= image_tag doodle.image.url %>
-          <h4>
-            <%= link_to "Created by #{doodle.user.nickname}", doodle %>
-          </h4>
-          <p><span class="this-score"><%= doodle.points %></span> points</p>
-        </div>
+        <h4 class="doodle-information">
+          <%= link_to "#{doodle.user.nickname}'s #{@mission.name}", doodle.user %>
+        </h4>
+
+        <h4 class="doodle-information right">
+          <a class="vote on-doodle" href="#" data-votedirection="1">
+            <i class="fa-thumbs-o-up fa"></i>
+          </a>
+          <a class="vote on-doodle" href="#" data-votedirection="-1">
+            <i class="fa-thumbs-o-down fa"></i>
+          </a>
+        </h4>
+
+        <p>
+          <span class="this-score">
+            <%= doodle.points %>
+          </span>
+          points / <%= link_to "#{doodle.comments.size} comments", doodle %>
+        </p>
+
       </div>
     <% end %>
   </div>

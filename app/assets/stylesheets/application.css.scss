@@ -183,6 +183,28 @@ h1.mission-name {
   text-align: center;
 }
 
+.image-container {
+  width: 100%;
+  text-align: center;
+  background: white;
+}
+
+.doodle-information {
+  display: inline-block;
+}
+
+a.vote {
+  font-size: 200%;
+  .fa-thumbs-o-down {
+    color: $red;
+  }
+
+  .fa-thumbs-o-up {
+    color: black;
+  }
+}
+
+
 ///////////////// while doodling ///////////////////
 
 .drawing-environment {
