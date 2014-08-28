@@ -77,7 +77,7 @@ Leaderboard = {
 
     @xScale = d3.scale.linear()
       .domain([0, @maxValue])
-      .range([@barHeight, @width])
+      .range([0, @width - @barHeight])
 
     @yScale = d3.scale.ordinal()
       .domain(d3.range(@data.length))
@@ -97,7 +97,6 @@ Leaderboard = {
       .attr("transform", "translate(0, #{@barHeight * oldDatalength})")
 
     userEnter.append("rect")
-      .style("fill", "#00e6b0")
       .style("opacity", "0.4")
       .attr("height", @yScale.rangeBand() - @spacing)
       .attr("x", @barHeight)
@@ -112,7 +111,12 @@ Leaderboard = {
     user.selectAll('rect')
       .transition()
       .attr("width", (d) =>
-        @xScale(d.points) + 1)
+        @xScale(d.points))
+      .style("fill", (d) =>
+        if d.points == @maxValue
+          "#F4D21F"
+        else
+          "#00e6b0")
 
     user.transition().attr("transform", (d, i) =>
       "translate(0, #{@yScale(i)})")
