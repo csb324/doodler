@@ -39,7 +39,7 @@ CreateDoodles =
     $('#color-picker a').click (event) =>
       event.preventDefault()
 
-      $('#color-picker a').removeClass("current-color")
+      $('#color-picker i').removeClass("current-color")
       $(event.target).addClass("current-color")
 
       @currentColor = $(event.target).css("color")
@@ -151,7 +151,8 @@ CreateDoodles =
     # for some reason this line is also necessary or the timer goes double speed
     @interval = undefined
 
-    window.seconds = 60
+    window.seconds = 20
+    ## DELETE THIS AFTER YOU FINISH STYLING CLARA
     @interval = setInterval(@countSecond, 1000)
 
   countSecond: =>
@@ -162,8 +163,12 @@ CreateDoodles =
       displayseconds = "0:0" + @seconds
     else
       displayseconds = "0:" + @seconds
-
+    timerbox.toggleClass("ticktock")
     timerbox.text(displayseconds)
+
+    if @seconds <= 15
+      timerbox.addClass("urgent")
+
     if @seconds == 0
       CreateDoodles.finishDrawing()
 

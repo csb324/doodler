@@ -1,25 +1,47 @@
-<div class="row">
-  <div class="column">
+<div class="while-drawing buttons">
+  <div id="color-picker">
+    <h1 class="sketch">COLORS: </h1>
+    <a href="#" style="color: #000;">
+      <i class="fa fa-circle current-color"></i>
+    </a>
+    <a href="#" style="color: #0036E6;">
+      <i class="fa fa-circle"></i>
+    </a>
+    <a href="#" style="color: #61FF03;">
+      <i class="fa fa-circle"></i>
+    </a>
+    <a href="#" style="color: #FFC300;">
+      <i class="fa fa-circle"></i>
+    </a>
+    <a href="#" style="color: #E60036;">
+      <i class="fa fa-circle"></i>
+    </a>
+    <a href="#" style="color: #9B00DC;">
+      <i class="fa fa-circle"></i>
+    </a>
+  </div>
 
-    <div class="while-drawing buttons">
-      <button id="show-this">show</button>
-      <button id="start-over">start over</button>
-      <button id="go-back">go back</button>
-      <div id="color-picker">
-        <a href="#" style="color: #000;" class="current-color">black</a>
-        <a href="#" style="color: #0036E6;">blue</a>
-        <a href="#" style="color: #FFC300;">yellow</a>
-        <a href="#" style="color: #E60036;">red</a>
-      </div>
-      <div id="timer"></div>
-    </div>
+</div>
 
-    <div class="done-drawing buttons" style="display: none;">
-      <button id="confirm">submit!</button>
-      <button id="nevermind">start over</button>
-    </div>
+<canvas id="my-canvas"></canvas>
 
-    <canvas id="my-canvas"></canvas>
-
+<div class="while-drawing buttons">
+  <div class="small-3 columns">
+    <button id="show-this" class="expand">show</button>
+  </div>
+  <div class="small-3 columns">
+    <button id="start-over" class="expand">start over</button>
+  </div>
+  <div class="small-3 columns">
+    <button id="go-back" class="expand">go back</button>
+  </div>
+  <div class="small-3 columns">
+    <span id="timer" class="button expand">0:60</span>
   </div>
 </div>
+
+<div class="done-drawing buttons" style="display: none;">
+  <button id="confirm">submit!</button>
+  <button id="nevermind">start over</button>
+</div>
+

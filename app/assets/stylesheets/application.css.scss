@@ -165,3 +165,60 @@ svg {
     fill: $navy-blue;
   }
 }
+
+////////////////// MISSION#SHOW STUFF ////////////////
+
+h1.mission-name {
+  display: inline-block;
+}
+
+#right-button button {
+  float: right;
+  margin-top: 10px;
+}
+
+#notice {
+  color: rgba($navy-blue, 0.5);
+  font-style: italic;
+  text-align: center;
+}
+
+///////////////// while doodling ///////////////////
+
+.drawing-environment {
+  text-align: center;
+}
+
+.while-drawing .small-3 {
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+}
+.while-drawing.buttons {
+  max-width: 500px;
+  margin: 0 auto;
+  .button, button {
+    background: desaturate(lighten($teal, 25), 45);
+    &:hover {
+      background: desaturate($teal, 45);
+    }
+    &.ticktock {
+      background: #9EF7C7;
+      &.urgent {
+        background: #E63A63;
+      }
+    }
+  }
+}
+
+#color-picker a {
+  font-size: 300%;
+  .current-color {
+    transform: translate(0px, -10px);
+    -webkit-transform: translate(0px, -10px);
+    -moz-transform: translate(0px, -10px);
+  }
+}
+
+#color-picker h1 {
+  display: inline-block;
+}

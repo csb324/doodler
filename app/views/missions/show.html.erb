@@ -1,40 +1,45 @@
 <div class="row">
 
   <div class="columns">
-    <h1 class="mission-name"><%= @mission.name %></h1>
+    <h1 class="mission-name">operation: <%= @mission.name %></h1>
+    <span id="right-button">
+    <% if user_signed_in? && @mission.open? %>
+      <button id="begin-drawing">doodle it!</button>
+    <% elsif !@mission.open? %>
+      <button href="#" class="disabled">Mission closed</button>
+    <% elsif !user_signed_in? %>
+      <%= button_to "Sign in with facebook", user_omniauth_authorize_path(:facebook), class: "button" %>
+    <% end %>
+    </span>
   </div>
-</div>
 
-<div id="doodles" class="drawing-environment-hide">
+
+  <div id="doodles" class="drawing-environment-hide medium-9 medium-centered small-12 columns">
+    <% if @doodles.length == 0 %>
+      <h5 id="notice">No doodles yet... be the first!</h5>
+    <% end %>
+    <% @doodles.each do |doodle| %>
+      <div class="single-doodle row" data-doodleId=<%= doodle.id %>>
+        <div class="medium-1 column">
+          <a class="vote on-doodle" href="#" data-votedirection="1"><i class="fa-caret-up fa"></i></a>
+          </br>
+          <a class="vote on-doodle" href="#" data-votedirection="-1"><i class="fa-caret-down fa"></i></a>
+        </p>
+        </div>
+
+        <div class="medium-11 columns">
+          <%= image_tag doodle.image.url %>
+          <h4>
+            <%= link_to "Created by #{doodle.user.nickname}", doodle %>
+          </h4>
+          <p><span class="this-score"><%= doodle.points %></span> points</p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
   <% if user_signed_in? && @mission.open? %>
-    <button id="begin-drawing">doodle it!</button>
-  <% elsif !@mission.open? %>
-    <button href="#" class="disabled">Mission closed</button>
-  <% elsif !user_signed_in? %>
-    <%= button_to "Sign in with facebook", user_omniauth_authorize_path(:facebook), class: "button" %>
-  <% end %>
-
-  <% @doodles.each do |doodle| %>
-    <div class="single-doodle row" data-doodleId=<%= doodle.id %> >
-      <div class="medium-1 column">
-        <a class="vote on-doodle" href="#" data-votedirection="1"><i class="fa-caret-up fa"></i></a>
-        </br>
-        <a class="vote on-doodle" href="#" data-votedirection="-1"><i class="fa-caret-down fa"></i></a>
-      </p>
-      </div>
-
-      <div class="medium-11 columns">
-        <%= image_tag doodle.image.url %>
-        <h4>
-          <%= link_to "Created by #{doodle.user.nickname}", doodle %>
-        </h4>
-        <p><span class="this-score"><%= doodle.points %></span> points</p>
-      </div>
+    <div class="drawing-environment medium-9 medium-centered small-12 columns" data-doodleable-id=<%= @mission.id %> data-doodleable-type="Mission">
     </div>
   <% end %>
 </div>
-
-<% if user_signed_in? && @mission.open? %>
-<div class="drawing-environment" data-doodleable-id=<%= @mission.id %> data-doodleable-type="Mission">
-</div>
-<% end %>
