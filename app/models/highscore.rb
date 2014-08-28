@@ -23,7 +23,8 @@ class Highscore
   end
 
   def friends_leaderboard
-    leaderboard(@user.friends)
+    me_and_friends = @user.friends + [@user]
+    leaderboard(me_and_friends)
   end
 
 end

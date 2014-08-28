@@ -38,6 +38,10 @@
 
       <% if @user == current_user %>
         <div class="columns medium-6" id="leaderboard" data-userid=<%= @user.id %>>
+          <div id="leaderboard-options" class="row">
+            <button id="global">everyone</button>
+            <button id="friends">just friends</button>
+          </div>
           <svg id="highscores"></svg>
         </div>
       <% else %>
