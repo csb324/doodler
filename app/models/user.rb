@@ -1,5 +1,3 @@
-require 'pry'
-
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -42,7 +40,10 @@ class User < ActiveRecord::Base
   end
 
   def profile_picture
-    profile_pictures.order(created_at: :desc).first
+    pic = profile_pictures.order(created_at: :desc).first
+    # if !pic.present?
+    #   pic = Doodle.where(default: true)
+    # end
   end
 
   def recent_doodles

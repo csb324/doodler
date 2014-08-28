@@ -37,7 +37,7 @@
       </div>
 
       <% if @user == current_user %>
-        <div class="columns medium-6" id="leaderboard">
+        <div class="columns medium-6" id="leaderboard" data-userid=<%= @user.id %>>
           <svg id="highscores"></svg>
         </div>
       <% else %>

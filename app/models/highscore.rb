@@ -9,11 +9,11 @@ class Highscore
   def leaderboard(set_of_users)
     high_scores = []
     set_of_users.each do |user|
-      person = {}
-      person[:id] = user.id
-      person[:profile_picture] = user.profile_picture
-      person[:points] = user.points
-      high_scores << object
+      topscore = {}
+      topscore[:user] = user
+      topscore[:profile_picture] = user.profile_picture
+      topscore[:points] = user.points
+      high_scores << topscore
     end
     high_scores
   end
