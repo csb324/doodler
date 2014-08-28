@@ -1,35 +1,35 @@
 <div class="row">
-<div class="column">
-<% if @doodle.doodleable_type == "Mission" %>
-  <h1><%= @doodle.user.nickname %>'s <%= @doodle.doodleable.name %></h1>
-<% else %>
-  <h1><%= @doodle.user.nickname %></h1>
-<% end %>
+<div class="medium-9 medium-centered small-12 columns">
+  <h1 class="sketch bold"><% if @doodle.doodleable_type == "Mission" %>
+    <%= link_to "#{@doodle.user.nickname}'s", @doodle.user %> <%= link_to @doodle.doodleable.name, @doodle.doodleable %>
+  <% else %>
+    <%= link_to "#{@doodle.user.nickname}", @doodle.user %>
+  <% end %></h1>
 
-<div id="doodle-area" class="single-doodle" data-doodleid="<%= @doodle.id %>">
-  <%= image_tag @doodle.image.url %>
-</div>
+  <div class="single-doodle image-container" data-doodleid="<%= @doodle.id %>">
+    <%= image_tag @doodle.image.url %>
+  </div>
 
-<div id="comment-area">
-  <h3>Comments</h3>
-  <% @doodle.comments.each do |comment| %>
-    <div class="comment" data-commentid="<%= comment.id %>">
-      <h5><%= comment.user.name %> </h5>
-      <p><%= comment.body %> </p>
-      <div>
-        <a href="#" class="vote on-comment" data-votedirection="1">Upvote</a>
-        or <a href="#" class="vote on-comment" data-votedirection="-1">Downvote</a>
-        <p><span class="this-score"><%= comment.points %></span> points</p>
+  <div id="comment-area">
+    <h3 class="sketch">Comments</h3>
+    <% @doodle.comments.each do |comment| %>
+      <div class="comment" data-commentid="<%= comment.id %>">
+        <h5><%= comment.user.name %> </h5>
+        <p><%= comment.body %> </p>
+        <div>
+          <a href="#" class="vote on-comment" data-votedirection="1">Upvote</a>
+          or <a href="#" class="vote on-comment" data-votedirection="-1">Downvote</a>
+          <p><span class="this-score"><%= comment.points %></span> points</p>
+        </div>
       </div>
+    <% end %>
+  </div>
+
+  <% if user_signed_in? %>
+    <div id="comment-form">
+      <textarea name="comment" id="comment-input"></textarea>
+      <button id="comment-button">add comment</button>
     </div>
   <% end %>
-</div>
-
-<% if user_signed_in? %>
-  <div id="comment-form">
-    <textarea name="comment" id="comment-input"></textarea>
-    <button id="comment-button">add comment</button>
-  </div>
-<% end %>
 </div>
 </div>
