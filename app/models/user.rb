@@ -39,11 +39,12 @@ class User < ActiveRecord::Base
     end
   end
 
-  def profile_picture
-    pic = profile_pictures.order(created_at: :desc).first
-    # if !pic.present?
-    #   pic = Doodle.where(default: true)
-    # end
+  def profile_picture_url
+    unless profile_pictures.size == 0
+      profile_pictures.order(created_at: :desc).first.image.url
+    else
+      "default.jpg"
+    end
   end
 
   def recent_doodles

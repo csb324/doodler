@@ -1,10 +1,8 @@
 <div class="row">
 
-  <% if @user.profile_pictures.present? %>
-    <div class="columns medium-3">
-      <%= image_tag @user.profile_picture.image.url %>
-    </div>
-  <% end %>
+  <div class="columns medium-3">
+    <%= image_tag @user.profile_picture_url %>
+  </div>
 
   <div class="columns medium-9">
     <h1 class="sketch bold"><%= @user.nickname %></h1>
