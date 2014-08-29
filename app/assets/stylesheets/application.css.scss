@@ -257,6 +257,21 @@ a .fa-thumbs-o-up {
 
 /////////////// DOODLE SHOW STUFF (COMMENTS MOSTLY) //////////
 
+#doodle-title {
+  display: inline-block;
+}
+
+.vote-buttons.on-doodle {
+  display: inline-block;
+  p {
+    display: inline-block;
+    padding: 0px 10px;
+  }
+  float: right;
+  position: relative;
+  top: 20px;
+}
+
 #comment-area {
   .profpic {
     width: 50px;

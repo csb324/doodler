@@ -11,7 +11,7 @@ CommentAndVote =
         @doodleId = $(event.target).parents(".single-doodle").data("doodleid")
         @postDoodleVote(value)
 
-      else if $(@).hasClass("on-comment")
+      else if $(event.target).hasClass("on-comment") || $(event.target).parent().hasClass("on-comment")
         @commentId = $(event.target).parents(".comment").data("commentid")
         @postCommentVote(value)
 
@@ -30,7 +30,7 @@ CommentAndVote =
         doodle_id: @doodleId
         votable_type: "Doodle"
       success: (data) ->
-        score = $("div[data-doodleid=#{CommentAndVote.doodleId}]").find('.this-score')
+        score = $("div[data-doodleid=#{CommentAndVote.doodleId}]").find('.this-doodle-score')
         score.empty().text(data.doodle.points)
 
   postCommentVote: (value) ->
@@ -43,7 +43,7 @@ CommentAndVote =
         comment_id: @commentId
         votable_type: "Comment"
       success: (data) ->
-        score = $("div[data-commentid=#{CommentAndVote.commentId}]").find('.this-score')
+        score = $("div[data-commentid=#{CommentAndVote.commentId}]").find('.this-comment-score')
         score.empty().text(data.comment.points)
 
   postComment: (text) =>

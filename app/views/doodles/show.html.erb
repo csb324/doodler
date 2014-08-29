@@ -1,14 +1,20 @@
 <div class="row">
-<div class="medium-9 medium-centered small-12 columns">
-  <h1 class="sketch bold"><% if @doodle.doodleable_type == "Mission" %>
+<div class="single-doodle medium-9 medium-centered small-12 columns" data-doodleid="<%= @doodle.id %>">
+  <h1 class="sketch bold" id="doodle-title"><% if @doodle.doodleable_type == "Mission" %>
     <%= link_to "#{@doodle.user.nickname}'s", @doodle.user %> <%= link_to @doodle.doodleable.name, @doodle.doodleable %>
   <% else %>
     <%= link_to "#{@doodle.user.nickname}", @doodle.user %>
-  <% end %></h1>
+  <% end %> </h1>
+  <div class="vote-buttons on-doodle">
+    <p class="score"><span class="this-doodle-score"><%= @doodle.points %></span> points</p>
+    <a href="#" class="vote on-doodle" data-votedirection="1"><i class="fa fa-thumbs-o-up"></i></a>
+    <a href="#" class="vote on-doodle" data-votedirection="-1"><i class="fa fa-thumbs-o-down"></i></a>
+  </div>
 
-  <div class="single-doodle image-container" data-doodleid="<%= @doodle.id %>">
+  <div class="image-container">
     <%= image_tag @doodle.image.url %>
   </div>
+
 
   <div id="comment-area">
     <h3 class="sketch">Comments</h3>
@@ -23,7 +29,7 @@
         <div class="comment-body">
           <p><%= comment.body %> </p>
           <div class="comment-score">
-            <span class="this-score"><%= comment.points %></span> points
+            <span class="this-comment-score"><%= comment.points %></span> points
           </div>
           <div class="vote-buttons">
             <a href="#" class="vote on-comment" data-votedirection="1"><i class="fa fa-thumbs-o-up"></i></a>
