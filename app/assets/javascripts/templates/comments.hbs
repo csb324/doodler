@@ -1,4 +1,25 @@
-<div>
-  <h5>You</h5>
-  <p>{{body}}</p>
+<div class="comment">
+  <img src="{{profile_picture_url}}" alt="Your picture" class="profpic">
+  <div class="comment-info">
+    <h4>
+      {{user.nickname}}
+    </h4>
+    <p>commented just now</p>
+  </div>
+  <div class="comment-body">
+    <p>{{body}}</p>
+    <div class="comment-score">
+      0 points
+    </div>
+    <div class="vote-buttons">
+      <i class="fa fa-thumbs-o-up" style="color: #a7a7a7"></i>
+      <i class="fa fa-thumbs-o-down" style="color: #a7a7a7"></i>
+    </div>
+  </div>
+
 </div>
+
+
+
+
+

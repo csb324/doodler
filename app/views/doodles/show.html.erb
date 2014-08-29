@@ -15,15 +15,25 @@
 
     <% @doodle.comments.each do |comment| %>
       <div class="comment" data-commentid="<%= comment.id %>">
-        <h5><%= comment.user.name %> </h5>
-        <p><%= comment.body %> </p>
-        <div>
-          <a href="#" class="vote on-comment" data-votedirection="1">Upvote</a>
-          or <a href="#" class="vote on-comment" data-votedirection="-1">Downvote</a>
-          <p><span class="this-score"><%= comment.points %></span> points</p>
+        <%= image_tag comment.user.profile_picture_url, class: "profpic" %>
+        <div class="comment-info">
+          <h4><%= comment.user.nickname %></h4>
+          <p>commented on <%= comment.created_at.strftime("%B %e") %> </p>
         </div>
+        <div class="comment-body">
+          <p><%= comment.body %> </p>
+          <div class="comment-score">
+            <span class="this-score"><%= comment.points %></span> points
+          </div>
+          <div class="vote-buttons">
+            <a href="#" class="vote on-comment" data-votedirection="1"><i class="fa fa-thumbs-o-up"></i></a>
+            <a href="#" class="vote on-comment" data-votedirection="-1"><i class="fa fa-thumbs-o-down"></i></a>
+          </div>
+        </div>
+
       </div>
     <% end %>
+
   </div>
 
   <% if user_signed_in? %>

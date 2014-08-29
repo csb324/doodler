@@ -193,15 +193,16 @@ h1.mission-name {
   display: inline-block;
 }
 
-a.vote {
+a.vote.on-doodle {
   font-size: 200%;
-  .fa-thumbs-o-down {
-    color: $red;
-  }
+}
 
-  .fa-thumbs-o-up {
-    color: black;
-  }
+a .fa-thumbs-o-down {
+  color: $red;
+}
+
+a .fa-thumbs-o-up {
+  color: black;
 }
 
 
@@ -244,3 +245,42 @@ a.vote {
 #color-picker h1 {
   display: inline-block;
 }
+
+/////////////// DOODLE SHOW STUFF (COMMENTS MOSTLY) //////////
+
+#comment-area {
+  .profpic {
+    width: 50px;
+    vertical-align: top;
+  }
+  .comment-info {
+    display: inline-block;
+    h4 {
+      line-height: 100%;
+      margin-top: 0px;
+    }
+  }
+  .comment-body {
+    padding: 15px;
+    background: rgba(white, 0.7);
+  }
+  p {
+    margin-bottom: 0px;
+  }
+  i {
+    font-size: 150%;
+  }
+  .vote-buttons {
+    float: right;
+  }
+  .comment-score {
+    font-size: 90%;
+    font-style: italic;
+    display: inline-block;
+    margin-top: 10px;
+  }
+  .comment {
+    margin-bottom: 20px;
+  }
+}
+

@@ -121,7 +121,10 @@ Leaderboard = {
     user.transition().attr("transform", (d, i) =>
       "translate(0, #{@yScale(i)})")
 
-    userEnter.append("text")
+    userEnter.append("a")
+      .attr("xlink:href", (d) ->
+        "/users/#{d.user.id}" )
+      .append("text")
       .attr("class", "person")
       .attr("x", 50)
       .attr("y", @barHeight / 2)
