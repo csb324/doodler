@@ -19,7 +19,7 @@
     <div id="profile-statistics" class="drawing-environment-hide row" data-doodleable-id=<%= @user.id %> data-doodleable-type="User">
 
       <div class="columns medium-6" id="points-chart">
-        <h4 class="sketch headline">your history</h4>
+        <h4 class="sketch headline"><%= @user == current_user ? "your" : "#{@user.nickname}'s" %> history</h4>
         <div id="stats-options" class="row">
           <div class="columns small-4">
             <button class="expand" id="doodles-per-day">doodles per day</button>

@@ -12,6 +12,7 @@
 
   <div id="comment-area">
     <h3 class="sketch">Comments</h3>
+
     <% @doodle.comments.each do |comment| %>
       <div class="comment" data-commentid="<%= comment.id %>">
         <h5><%= comment.user.name %> </h5>
