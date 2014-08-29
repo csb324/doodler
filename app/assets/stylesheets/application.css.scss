@@ -149,7 +149,7 @@ button.current {
   background: $teal;
 }
 
-#stats-options .columns {
+#stats-options .columns, #leaderboard-options .columns {
   padding-left: 0.7rem;
   padding-right: 0.7rem;
 }
@@ -163,6 +163,15 @@ svg {
 
   rect {
     fill: $navy-blue;
+  }
+  .highscore {
+    display: none;
+  }
+
+  g:hover {
+    .highscore {
+      display: block;
+    }
   }
 }
 

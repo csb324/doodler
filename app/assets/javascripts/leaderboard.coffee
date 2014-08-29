@@ -108,6 +108,22 @@ Leaderboard = {
       .attr("width", @yScale.rangeBand() - @spacing)
       # nice that the profpics are always square huh?
 
+    userEnter.append("a")
+      .attr("xlink:href", (d) ->
+        "/users/#{d.user.id}" )
+      .append("text")
+      .attr("class", "person")
+      .attr("x", 50)
+      .attr("y", @barHeight / 2)
+      .style("fill","#000")
+      .attr("dominant-baseline", "middle")
+
+    userEnter.append("text")
+      .attr("class", "highscore")
+      .attr("y", @barHeight / 2)
+      .attr("dominant-baseline", "middle")
+      .style("fill", "#000")
+
     user.selectAll('rect')
       .transition()
       .attr("width", (d) =>
@@ -121,17 +137,13 @@ Leaderboard = {
     user.transition().attr("transform", (d, i) =>
       "translate(0, #{@yScale(i)})")
 
-    userEnter.append("a")
-      .attr("xlink:href", (d) ->
-        "/users/#{d.user.id}" )
-      .append("text")
-      .attr("class", "person")
-      .attr("x", 50)
-      .attr("y", @barHeight / 2)
-      .style("fill","#000")
-      .attr("dominant-baseline", "middle")
+    user.selectAll('.highscore')
+      .text((d) =>
+        d.points)
+      .attr("x", (d) =>
+        @xScale(d.points) + 10)
 
-    user.selectAll('text')
+    user.selectAll('.person')
       .text((d) =>
         d.user.nickname)
 

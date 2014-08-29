@@ -38,8 +38,12 @@
         <div class="columns medium-6" id="leaderboard" data-userid=<%= @user.id %>>
           <h4 class="sketch headline">leaderboard</h4>
           <div id="leaderboard-options" class="row">
-            <button id="global">everyone</button>
-            <button id="friends">just friends</button>
+            <div class="columns small-6">
+              <button class="expand" id="global">everyone</button>
+            </div>
+            <div class="columns small-6">
+              <button class="expand" id="friends">just friends</button>
+            </div>
           </div>
           <svg id="highscores"></svg>
         </div>
