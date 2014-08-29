@@ -49,32 +49,30 @@
       </div>
     </div>
 
-  <% else %>
+  <% end %>
   <!-- NOW for what to do if the user ISN'T signed in: -->
 
-    <div class="columns">
-      <div class="recent">
-        <h4 class="sketch headline">recent doodles from around the world</h4>
-        <% @recent_doodles.each do |doodle| %>
-          <div class="small-2 columns single-doodle">
-            <%= link_to doodle do %>
-              <%= image_tag doodle.image.url, class: "recent-image" %>
-              <div class="doodle-info" style="display: none;">
-                <% if doodle.doodleable_type == "Mission" %>
-                  <h4><%= doodle.doodleable.name %></h4>
-                  <p><%= doodle.points %> points</p>
-                <% else %>
-                  <h4>PROFILE PICTURE</h4>
-                <% end %>
-                <p>by <%= doodle.user.nickname %></p>
-                <p><%= doodle.comments.size %> comments</p>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
+  <div class="columns">
+    <div class="recent">
+      <h4 class="sketch headline">recent doodles from around the world</h4>
+      <% @recent_doodles.each do |doodle| %>
+        <div class="small-2 columns single-doodle">
+          <%= link_to doodle do %>
+            <%= image_tag doodle.image.url, class: "recent-image" %>
+            <div class="doodle-info" style="display: none;">
+              <% if doodle.doodleable_type == "Mission" %>
+                <h4><%= doodle.doodleable.name %></h4>
+                <p><%= doodle.points %> points</p>
+              <% else %>
+                <h4>PROFILE PICTURE</h4>
+              <% end %>
+              <p>by <%= doodle.user.nickname %></p>
+              <p><%= doodle.comments.size %> comments</p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
-
-  <% end %>
+  </div>
 
 </div>
