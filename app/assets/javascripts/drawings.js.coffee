@@ -80,7 +80,6 @@ CreateDoodles =
 
 
   addClick: (x, y, color, dragging) ->
-    console.log("adding a click")
     @clickY.push(y)
     @clickX.push(x)
     @colors.push(color)
@@ -142,7 +141,6 @@ CreateDoodles =
         errormessage = $('<div>').text("oh no something went wrong")
         $('#doodles').empty().append(errormessage)
       success: (data) ->
-        console.log(data)
         window.location = "/doodles/#{data.doodle.id}"
 
   startTimer: ->

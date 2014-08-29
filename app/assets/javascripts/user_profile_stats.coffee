@@ -65,7 +65,6 @@ UserGraph =
 
   # I just really want it to be responsive ok
   setWidths: ->
-    console.log("RESIZING THE USER HISTORY")
     @width = parseInt(@chartContainer.style("width"), 10) - @margin.left - @margin.right
     @xScale.rangeRoundBands([0, @width], .1)
 

@@ -3,7 +3,6 @@ $(document).ready ->
 
 RecentDoodles =
   initialize: ->
-    console.log("HEY")
 
     $('.doodle-grid .single-doodle').mouseenter (event) ->
       info = $(@).find(".doodle-info")

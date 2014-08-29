@@ -10,12 +10,8 @@ class DoodlesController < ApplicationController
   end
 
   def create
-    @doodle = Doodle.new
+    @doodle = Doodle.new(user: current_user, doodleable: doodleable, image: params[:doodle][:imagedata])
     @doodle.image = convert_data_uri_to_upload(params[:doodle][:imagedata])
-    @doodle.user = current_user
-
-    @doodle.doodleable = doodleable
-
     @doodle.save
     respond_with @doodle
   end

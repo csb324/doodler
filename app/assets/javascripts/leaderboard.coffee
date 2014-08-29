@@ -26,8 +26,6 @@ Leaderboard = {
         console.log(omg)
       success: (response) =>
         @ajaxData = response
-        console.log("ajax returned....")
-        console.log(@ajaxData)
         @createGraph()
 
   buildGraphBox: ->
