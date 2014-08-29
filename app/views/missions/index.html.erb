@@ -4,6 +4,9 @@
     <div class="column">
       <% if !user_signed_in? %>
         <h1 class="sketch" id="welcome">welcome to operation: doodle</h1>
+        <div class="medium-9 medium-centered small-12 columns demo">
+          <%= image_tag "demo.gif" %>
+        </div>
       <% end %>
       <h4 class="sketch">open missions:</h4>
     </div>
@@ -50,8 +53,6 @@
     </div>
 
   <% end %>
-  <!-- NOW for what to do if the user ISN'T signed in: -->
-
   <div class="columns">
     <div class="recent">
       <h4 class="sketch headline">recent doodles from around the world</h4>
