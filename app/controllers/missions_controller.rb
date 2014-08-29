@@ -16,7 +16,6 @@ class MissionsController < ApplicationController
 
     # what is this doing here??
     @recent_doodles = Doodle.order(created_at: :desc).limit(6)
-
   end
 
   def show
