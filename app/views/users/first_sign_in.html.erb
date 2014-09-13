@@ -5,7 +5,7 @@
 
 <div id="errors"></div>
 
-<h4>Email address:</h4> <input type="text" id="email" value="<%= @user.email %>">
+<h4>Email address:</h4> <input type="text" id="email" value="<%= @user.email_set? ? @user.email : "example@example.com" %>">
 
 <h4>Username:</h4> <input type="text" id="yournickname">
 <p>This is what other people will see! Choose carefully!</p>

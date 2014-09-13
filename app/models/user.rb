@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
-      user.email = auth.info.email || "example@example.com"
+      user.email = auth.info.email || "a@b.com"
       user.password = Devise.friendly_token[0, 20]
       user.name = auth.info.name
       user.omniauth_token = auth.credentials.token
@@ -69,6 +69,10 @@ class User < ActiveRecord::Base
 
       user.save!
     end
+  end
+
+  def email_set?
+    email != "a@b.com"
   end
 
   def find_friends
