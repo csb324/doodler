@@ -5,6 +5,7 @@ $(document).ready ->
 UserGraph =
   initialize: ->
     @values = @startedAtTheBottomNowWereHere
+    @timeWindow = 7
     @buildGraphBox()
     @getHistoryData()
 
@@ -69,8 +70,6 @@ UserGraph =
     @xScale.rangeRoundBands([0, @width], .1)
 
     @xAxis = d3.svg.axis().scale(@xScale)
-      .ticks(d3.time.days, 1)
-      .tickFormat(d3.time.format("%b %e"))
 
     @chart = d3.select("#userstats")
 
@@ -88,6 +87,12 @@ UserGraph =
 
   buildGraph: ->
     @data = @ajaxData.slice().sort(@sortByDate)
+    # @data = @data.slice(-1 * @timeWindow)
+    # console.log(@data)
+
+    number_of_ticks = 10
+    distance_between_ticks = Math.floor(@data.length / number_of_ticks)
+
     @maxValue = d3.max(@data, (d) =>
       @values(d))
 
@@ -103,8 +108,9 @@ UserGraph =
 
     @xAxis = d3.svg.axis()
       .scale(@xScale)
-      .ticks(d3.time.days, 1)
-      .tickFormat(d3.time.format("%b %e"))
+      .tickValues(@xScale.domain().filter((d, i) =>
+        !(i % distance_between_ticks)))
+
 
     svg = d3.select("#userstats")
       .attr("width", @width + @margin.left + @margin.right)
@@ -115,6 +121,11 @@ UserGraph =
       .data(@data)
       .enter()
       .append("g")
+
+    axis = svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0, #{@height})")
+      .call(@xAxis)
 
     @rectangle = day.append("rect")
       .attr("class", "day")
@@ -135,6 +146,10 @@ UserGraph =
       .attr("class", "score")
       .attr("text-anchor", "middle")
 
+    # @dayLabel = day.append("text")
+    #   .attr("class", "date")
+    #   .attr("text-anchor", "middle")
+
     @valueLabel
       .text((d) =>
         @values(d)
@@ -154,10 +169,15 @@ UserGraph =
           "#000"
         )
 
-    svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0, #{@height})")
-      .call(@xAxis)
+    # @dayLabel
+    #   .text((d) =>
+    #     @dateParser(d)
+    #   ).attr("x", (d) =>
+    #     @xScale(@dateParser(d)) + (@xScale.rangeBand() / 2))
+    #   .attr("y", @height)
+
+
+
 
   redrawGraph: ->
     @maxValue = d3.max(@data, (d) =>

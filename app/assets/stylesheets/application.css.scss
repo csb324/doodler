@@ -169,12 +169,12 @@ svg {
   rect {
     fill: $navy-blue;
   }
-  .highscore {
+  .highscore, .date {
     display: none;
   }
 
   g:hover {
-    .highscore {
+    .highscore, .date {
       display: block;
     }
   }
