@@ -11,8 +11,10 @@ class MissionsController < ApplicationController
     @open_missions = Mission.where("created_at BETWEEN :yesterday AND :now",
       { now: Time.now(), yesterday: Time.now() - 1.day })
 
-    @votable_missions = Mission.where("created_at BETWEEN :day_before AND :yesterday",
+    @votable_missions = Mission.where(
+      "created_at BETWEEN :day_before AND :yesterday",
       { yesterday: Time.now() - 1.day, day_before: Time.now() - 2.days })
+      .select { |mission| mission.doodles.count > 0 }
 
     # what is this doing here??
     @recent_doodles = Doodle.order(created_at: :desc).limit(6)
